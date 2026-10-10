@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mine Qubic</title>
+<meta name="description" content="Un clic et ton PC mine du QUBIC quand tu ne t'en sers pas. Gratuit, non-custodial, payé chaque semaine sur ton propre wallet.">
+<style>
+/* Layout : une colonne centrée, le téléchargement au-dessus de la ligne de flottaison, la FAQ en accordéon. Marque Qubic : cyan #23FFFF sur #232429. */
+:root { --bg: #16171b; --bg2: #1c1d22; --card: #232429; --line: #33353d; --fg: #eef0f4; --muted: #9096a4; --accent: #23ffff; --accent-ink: #16171b; --warn: #ffc857; --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 var(--font); }
+body { padding-inline: 16px; padding-block: 0 48px; }
+a { color: var(--accent); }
+.wrap { max-width: 880px; margin: 0 auto; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.brand img { width: 32px; height: 32px; border-radius: 8px; }
+nav { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+nav a:hover { color: var(--fg); }
+.lang { display: inline-flex; background: var(--bg2); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang button { font: inherit; font-size: 13px; border: 0; background: transparent; color: var(--muted); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.lang button.on { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: 32px 0 40px; }
+h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -.5px; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 18px; margin: 0 0 24px; max-width: 46ch; }
+.dl { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-ink); font-weight: 800; font-size: 18px; padding: 16px 24px; border-radius: 14px; text-decoration: none; box-shadow: 0 12px 40px rgba(35,255,255,.25); }
+.dl small { font-weight: 500; font-size: 13px; opacity: .8; }
+.dl-meta { color: var(--muted); font-size: 13px; margin-top: 10px; }
+.dl-meta a { color: var(--muted); }
+.shot { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.4); }
+.shot .pill { display: inline-block; background: var(--accent); color: var(--accent-ink); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; float: inline-end; }
+.shot .ring { width: 140px; height: 140px; border-radius: 50%; margin: 18px auto; background: radial-gradient(circle at 35% 30%, #2b2d35, #1a1b20 70%); border: 6px solid var(--accent); box-shadow: 0 0 30px rgba(35,255,255,.3); display: grid; place-items: center; }
+.shot .ring i { width: 36px; height: 36px; border-radius: 8px; background: var(--fg); display: block; }
+.shot .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+.shot .stats div { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 4px; text-align: center; font-size: 11px; color: var(--muted); }
+.shot .stats b { display: block; color: var(--fg); font-size: 15px; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.shot .earn { margin-top: 12px; background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.shot .earn b { font-size: 22px; }
+.shot .earn span { color: var(--accent); font-weight: 700; display: block; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 40px; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.step .n { color: var(--accent); font-weight: 800; font-size: 13px; letter-spacing: .5px; }
+.step h3 { margin: 6px 0 6px; font-size: 17px; }
+.step p { margin: 0; color: var(--muted); font-size: 14px; }
+h2 { font-size: 24px; margin: 36px 0 14px; letter-spacing: -.3px; }
+.facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.fact { border-inline-start: 3px solid var(--accent); padding: 4px 14px; }
+.fact b { display: block; }
+.fact span { color: var(--muted); font-size: 14px; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; margin: 8px 0; }
+summary { cursor: pointer; padding: 14px 0; font-weight: 600; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; float: inline-end; color: var(--muted); }
+details[open] summary::after { content: "–"; }
+details p, details ol { color: var(--muted); font-size: 15px; margin: 0 0 14px; }
+details ol { padding-inline-start: 20px; }
+.warn { background: rgba(255,200,87,.1); border: 1px solid rgba(255,200,87,.4); color: var(--warn); border-radius: 12px; padding: 12px 14px; font-size: 14px; margin: 12px 0; }
+footer { color: var(--muted); font-size: 13px; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+footer a { color: var(--muted); }
+[data-l] { display: none; }
+html[data-lang="fr"] [data-l="fr"], html[data-lang="en"] [data-l="en"] { display: revert; }
+@media (max-width: 720px) { .hero { grid-template-columns: 1fr; } .steps, .facts { grid-template-columns: 1fr; } .shot { max-width: 360px; margin: 0 auto; } }
+@media (prefers-reduced-motion: no-preference) { .dl { transition: transform .1s; } .dl:active { transform: scale(.98); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><img src="data:image/png;base64,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" alt=""> Mine Qubic</div>
+    <nav>
+      <a href="#how"><span data-l="fr">Comment ça marche</span><span data-l="en">How it works</span></a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/__OWNER__/mine-qubic" rel="noopener">GitHub</a>
+      <div class="lang" role="group" aria-label="Language"><button data-set="fr" class="on">FR</button><button data-set="en">EN</button></div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1><span data-l="fr">Ton PC mine du QUBIC. Un clic.</span><span data-l="en">Your PC mines QUBIC. One click.</span></h1>
+      <p class="sub"><span data-l="fr">Ça tourne quand tu ne te sers pas du PC, ça se coupe dès que tu reviens, et tu es payé chaque semaine sur ton propre wallet. Gratuit, non-custodial, open source.</span><span data-l="en">Runs when you are away from your PC, stops the moment you are back, and pays you every week to your own wallet. Free, non-custodial, open source.</span></p>
+      <a class="dl" href="https://github.com/__OWNER__/mine-qubic/releases/latest" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+        <span><span data-l="fr">Télécharger pour Windows</span><span data-l="en">Download for Windows</span><br><small>Windows 10/11 · 64 bits · <span data-l="fr">gratuit</span><span data-l="en">free</span></small></span>
+      </a>
+      <div class="dl-meta"><span data-l="fr">Aussi disponible pour Linux (AppImage). </span><span data-l="en">Also available for Linux (AppImage). </span><a href="https://github.com/__OWNER__/mine-qubic/releases" rel="noopener"><span data-l="fr">Toutes les versions</span><span data-l="en">All releases</span></a></div>
+    </div>
+    <div class="shot" aria-hidden="true">
+      <span class="pill"><span data-l="fr">Minage en cours</span><span data-l="en">Mining</span></span>
+      <div style="font-weight:700">Mine Qubic</div>
+      <div class="ring"><i></i></div>
+      <div class="stats">
+        <div><span data-l="fr">VITESSE</span><span data-l="en">SPEED</span><b>2.1 k</b></div>
+        <div><span data-l="fr">CŒURS</span><span data-l="en">CORES</span><b>8/16</b></div>
+        <div>SOL.<b>3</b></div>
+        <div><span data-l="fr">DURÉE</span><span data-l="en">UPTIME</span><b>5 h 12</b></div>
+      </div>
+      <div class="earn"><b>684 310</b> QUBIC <span>≈ 1,30 €</span></div>
+    </div>
+  </section>
+
+  <h2 id="how"><span data-l="fr">Comment ça marche</span><span data-l="en">How it works</span></h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3><span data-l="fr">Télécharge et clique sur Démarrer</span><span data-l="en">Download and click Start</span></h3><p><span data-l="fr">L'app crée ton wallet Qubic sur ton PC et installe le mineur officiel qubic.li. Rien à configurer.</span><span data-l="en">The app creates your Qubic wallet on your PC and installs the official qubic.li miner. Nothing to set up.</span></p></div>
+    <div class="step"><div class="n">2</div><h3><span data-l="fr">Ton PC entraîne une IA quand il ne sert pas</span><span data-l="en">Your PC trains an AI when idle</span></h3><p><span data-l="fr">Le minage Qubic est de l'entraînement de réseaux de neurones (Aigarth). L'app se met en pause dès que tu touches au clavier ou qu'un jeu est en plein écran.</span><span data-l="en">Qubic mining is neural-network training (Aigarth). The app pauses as soon as you touch the keyboard or a game goes full screen.</span></p></div>
+    <div class="step"><div class="n">3</div><h3><span data-l="fr">Payé chaque mercredi</span><span data-l="en">Paid every Wednesday</span></h3><p><span data-l="fr">Le pool verse tes QUBIC directement sur ton wallet. Tu peux les garder, les envoyer sur l'app Qubic Wallet ou les vendre sur un exchange.</span><span data-l="en">The pool pays your QUBIC straight to your wallet. Keep them, move them to the Qubic Wallet app or sell them on an exchange.</span></p></div>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><b><span data-l="fr">Non-custodial</span><span data-l="en">Non-custodial</span></b><span data-l="fr">Tes clés restent chez toi. L'éditeur ne peut ni voir ni toucher tes fonds.</span><span data-l="en">Your keys stay with you. The publisher can neither see nor touch your funds.</span></div>
+    <div class="fact"><b><span data-l="fr">Frais transparents : 3 % du temps</span><span data-l="en">Transparent fee: 3% of time</span></b><span data-l="fr">Comme les mineurs classiques (XMRig, T-Rex). Affiché dans l'app, payé par le pool, jamais par toi.</span><span data-l="en">Like classic miners (XMRig, T-Rex). Shown in the app, paid by the pool, never by you.</span></div>
+    <div class="fact"><b><span data-l="fr">Open source et vérifié</span><span data-l="en">Open source and verified</span></b><span data-l="fr">Code public sous licence MIT. Le mineur téléchargé est vérifié par empreinte SHA-256.</span><span data-l="en">Public code under MIT license. The downloaded miner is verified by SHA-256 hash.</span></div>
+    <div class="fact"><b><span data-l="fr">15 langues</span><span data-l="en">15 languages</span></b><span data-l="fr">FR, EN, ES, PT, DE, IT, RU, ZH, JA, KO, TR, ID, VI, AR, HI. Mises à jour automatiques.</span><span data-l="en">FR, EN, ES, PT, DE, IT, RU, ZH, JA, KO, TR, ID, VI, AR, HI. Automatic updates.</span></div>
+  </div>
+
+  <h2 id="faq">FAQ</h2>
+  <details open>
+    <summary><span data-l="fr">Windows affiche « Windows a protégé votre ordinateur ». C'est normal ?</span><span data-l="en">Windows says "Windows protected your PC". Is that normal?</span></summary>
+    <p><span data-l="fr">Oui, pour une application récente qui n'a pas encore de réputation auprès de Microsoft SmartScreen. Pour continuer :</span><span data-l="en">Yes, for a new application that has no reputation yet with Microsoft SmartScreen. To continue:</span></p>
+    <ol>
+      <li><span data-l="fr">Clique sur « Informations complémentaires ».</span><span data-l="en">Click "More info".</span></li>
+      <li><span data-l="fr">Clique sur « Exécuter quand même ».</span><span data-l="en">Click "Run anyway".</span></li>
+    </ol>
+    <p><span data-l="fr">Les antivirus signalent parfois les logiciels de minage (« CoinMiner ») même quand ils sont légitimes et installés volontairement. Tu peux ajouter le dossier de Mine Qubic aux exclusions. Le code est public : tu peux le lire ou le compiler toi-même.</span><span data-l="en">Antivirus software sometimes flags mining programs ("CoinMiner") even when they are legitimate and installed on purpose. You can add the Mine Qubic folder to the exclusions. The code is public: you can read it or build it yourself.</span></p>
+  </details>
+  <details>
+    <summary><span data-l="fr">Combien je vais gagner ?</span><span data-l="en">How much will I earn?</span></summary>
+    <p><span data-l="fr">Ça dépend de ton processeur, du nombre de mineurs sur le réseau et du cours du QUBIC : aucun montant n'est garanti. L'app affiche une estimation nette (après électricité) dès ton premier paiement. Un PC qui mine chauffe la pièce : en hiver, si tu te chauffes à l'électricité, cette chaleur n'est pas perdue.</span><span data-l="en">It depends on your processor, the number of miners on the network and the QUBIC price: no amount is guaranteed. The app shows a net estimate (after electricity) from your first payout. A mining PC heats the room: in winter, if you heat with electricity, that heat is not wasted.</span></p>
+  </details>
+  <details>
+    <summary><span data-l="fr">Est-ce que ça ralentit mon PC ?</span><span data-l="en">Does it slow my PC down?</span></summary>
+    <p><span data-l="fr">Par défaut, non : l'app ne mine que quand tu ne te sers pas du PC depuis 3 minutes, et s'arrête en quelques secondes dès que tu reviens ou qu'un jeu passe en plein écran. Tu peux aussi choisir de miner en permanence à puissance réduite.</span><span data-l="en">By default, no: the app only mines after 3 minutes without you using the PC, and stops within seconds when you come back or a game goes full screen. You can also choose to mine all the time at reduced power.</span></p>
+  </details>
+  <details>
+    <summary><span data-l="fr">Où sont mes QUBIC ? Comment les récupérer ?</span><span data-l="en">Where are my QUBIC? How do I get them?</span></summary>
+    <p><span data-l="fr">Sur ton wallet Qubic, créé sur ton PC. Dans l'app : « Mon wallet » → « Connecter mon wallet » pour afficher le QR code, ouvrir wallet.qubic.org ou sauvegarder ta phrase secrète (55 lettres). Cette phrase s'importe telle quelle dans l'app officielle Qubic Wallet : c'est le même wallet. Pour vendre : bouton « Vendre mes QUBIC ».</span><span data-l="en">In your Qubic wallet, created on your PC. In the app: "My wallet" → "Connect my wallet" to show the QR code, open wallet.qubic.org or back up your secret phrase (55 letters). That phrase imports as-is into the official Qubic Wallet app: it is the same wallet. To sell: "Sell my QUBIC".</span></p>
+  </details>
+  <details>
+    <summary><span data-l="fr">Que se passe-t-il si je perds ma phrase secrète ?</span><span data-l="en">What if I lose my secret phrase?</span></summary>
+    <p><span data-l="fr">Tes QUBIC sont perdus, et personne ne peut les récupérer, pas même nous : c'est le principe du non-custodial. Note-la sur papier dès que l'app te le propose.</span><span data-l="en">Your QUBIC are lost and nobody can recover them, not even us: that is what non-custodial means. Write it on paper as soon as the app asks you to.</span></p>
+  </details>
+  <details>
+    <summary><span data-l="fr">Quel matériel il faut ?</span><span data-l="en">What hardware do I need?</span></summary>
+    <p><span data-l="fr">Un PC Windows 10/11 64 bits avec un processeur récent (AVX2 minimum, AVX-512 idéal : Ryzen 7000/9000, Intel 11e gen et plus), 8 Go de RAM ou plus. Une carte NVIDIA est optionnelle. Les Mac ne sont pas encore pris en charge.</span><span data-l="en">A 64-bit Windows 10/11 PC with a recent processor (AVX2 minimum, AVX-512 ideal: Ryzen 7000/9000, Intel 11th gen and later), 8 GB of RAM or more. An NVIDIA card is optional. Macs are not supported yet.</span></p>
+  </details>
+  <details>
+    <summary><span data-l="fr">C'est légal ? Et les impôts ?</span><span data-l="en">Is it legal? What about taxes?</span></summary>
+    <p><span data-l="fr">Miner est légal dans la plupart des pays, sur un ordinateur qui t'appartient (pas celui de ton employeur ou de ton école). Les gains sont imposables selon ton pays : en France, ils relèvent en principe des bénéfices non commerciaux. Renseigne-toi.</span><span data-l="en">Mining is legal in most countries, on a computer you own (not your employer's or school's). Earnings are taxable depending on your country. Check your local rules.</span></p>
+  </details>
+
+  <div class="warn"><span data-l="fr">Mine Qubic est un projet indépendant : il n'est pas édité par Qubic. Le logo Qubic est utilisé conformément au kit de marque public de qubic.org.</span><span data-l="en">Mine Qubic is an independent project: it is not published by Qubic. The Qubic logo is used in accordance with qubic.org's public brand kit.</span></div>
+
+  <footer>
+    <span>© 2026 Cointribune</span>
+    <a href="https://github.com/__OWNER__/mine-qubic/blob/main/docs/cgu.md" rel="noopener"><span data-l="fr">Conditions d'utilisation</span><span data-l="en">Terms of use</span></a>
+    <a href="https://github.com/__OWNER__/mine-qubic/blob/main/docs/confidentialite.md" rel="noopener"><span data-l="fr">Confidentialité</span><span data-l="en">Privacy</span></a>
+    <a href="https://pool.qubic.li" rel="noopener">pool.qubic.li</a>
+    <a href="https://qubic.org" rel="noopener">qubic.org</a>
+  </footer>
+</div>
+<script>
+(() => {
+  const root = document.documentElement;
+  const set = (l) => { root.setAttribute('data-lang', l); root.lang = l; document.querySelectorAll('.lang button').forEach((b) => b.classList.toggle('on', b.dataset.set === l)); try { localStorage.setItem('mq-lang', l); } catch (_) {} };
+  let l = 'fr';
+  try { l = localStorage.getItem('mq-lang') || ((navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en'); } catch (_) {}
+  set(l);
+  document.querySelectorAll('.lang button').forEach((b) => { b.onclick = () => set(b.dataset.set); });
+})();
+</script>
+</body>
+</html>

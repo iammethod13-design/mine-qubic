@@ -1,0 +1,88 @@
+{
+  "name": "mine-qubic",
+  "productName": "Mine Qubic",
+  "version": "0.2.0",
+  "description": "Un clic et ton PC mine du QUBIC sur le pool qubic.li (non-custodial).",
+  "main": "src/main.js",
+  "author": "Cointribune",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/run.js",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux AppImage",
+    "icon": "python3 scripts/make_icon.py",
+    "test:ui": "node test/ui.js",
+    "test:all": "npm test && npm run test:ui"
+  },
+  "dependencies": {
+    "@qubic-lib/qubic-ts-library": "^0.1.6",
+    "adm-zip": "^0.5.16",
+    "electron-updater": "^6.8.9",
+    "qrcode": "^1.5.4",
+    "tar": "^7.4.3"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.cointribune.minequbic",
+    "productName": "Mine Qubic",
+    "artifactName": "MineQubic-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "test/mock-client.js",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "deleteAppDataOnUninstall": false,
+      "shortcutName": "Mine Qubic"
+    },
+    "portable": {
+      "artifactName": "MineQubic-${version}-portable.exe"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "assets/icon.png",
+      "artifactName": "MineQubic-${version}-linux-${arch}.${ext}"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "CHANGE_ME",
+        "repo": "mine-qubic"
+      }
+    ]
+  }
+}

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>Mine Qubic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Marque Qubic (brand kit qubic.org) réutilisée partout via <use> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="qmark" viewBox="0 0 1206 1206">
+      <rect x="351" y="171" width="214" height="649" rx="22" fill="currentColor"/>
+      <rect x="639" y="171" width="217" height="865" rx="22" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <!-- ÉCRAN 1 : première ouverture -->
+  <section id="onboard" class="screen hidden">
+    <div class="logo-wrap"><div class="logo"><svg><use href="#qmark"/></svg></div></div>
+    <h1 data-i18n="onboard_title"></h1>
+    <p class="sub" data-i18n="onboard_sub"></p>
+    <ul class="bullets">
+      <li data-i18n="onboard_b1"></li>
+      <li data-i18n="onboard_b2"></li>
+      <li data-i18n="onboard_b3"></li>
+    </ul>
+    <button id="onboard-start" class="cta"><span data-i18n="onboard_cta"></span></button>
+    <p class="fee" id="onboard-fee"></p>
+    <button id="onboard-have" class="linkbtn" data-i18n="onboard_have"></button>
+    <button id="onboard-terms" class="linkbtn" data-i18n="terms_link"></button>
+    <div class="lang-row"><select id="onboard-lang" aria-label="Language"></select></div>
+  </section>
+
+  <!-- ÉCRAN 2 : principal -->
+  <section id="main" class="screen hidden">
+    <header>
+      <div class="brand"><span class="logo small"><svg><use href="#qmark"/></svg></span> Mine Qubic</div>
+      <div id="pill" class="pill">—</div>
+    </header>
+
+    <div class="hero">
+      <button id="bigbtn" class="bigbtn" aria-label="Start" aria-pressed="false">
+        <svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/></svg>
+        <span class="icon play"></span>
+      </button>
+      <div id="state-label" class="state-label">—</div>
+      <div id="state-detail" class="state-detail"></div>
+      <div id="progress" class="progress hidden"><div></div></div>
+    </div>
+
+    <div class="grid">
+      <div class="stat"><div class="k" data-i18n="speed"></div><div class="v" id="s-speed">—</div></div>
+      <div class="stat"><div class="k" data-i18n="threads"></div><div class="v" id="s-threads">—</div></div>
+      <div class="stat"><div class="k" data-i18n="sols"></div><div class="v" id="s-sols">—</div></div>
+      <div class="stat"><div class="k" data-i18n="uptime"></div><div class="v" id="s-uptime">—</div></div>
+    </div>
+
+    <div id="sys-warn" class="nag hidden"></div>
+
+    <div class="card">
+      <div class="card-title" data-i18n="earnings"></div>
+      <div class="bal"><span id="bal-qubic">—</span><span class="unit">QUBIC</span></div>
+      <div class="bal-eur" id="bal-eur">—</div>
+      <div class="muted" id="earned-since"></div>
+      <div class="muted" id="next-payout"></div>
+      <div id="backup-nag" class="nag hidden" data-i18n="backup_nag"></div>
+    </div>
+
+    <details class="card" id="card-est">
+      <summary data-i18n="est_title"></summary>
+      <div class="muted" id="est-none" data-i18n="est_none"></div>
+      <div id="est-lines" class="est hidden">
+        <div id="est-last"></div>
+        <div id="est-gross"></div>
+        <div id="est-elec"></div>
+        <div class="est-net" id="est-net"></div>
+      </div>
+      <div class="row two">
+        <label><span class="label" data-i18n="kwh_price"></span><input type="number" id="i-kwh" min="0" max="2" step="0.01"></label>
+        <label><span class="label" data-i18n="watts"></span><input type="number" id="i-watts" min="5" max="2000" step="1" placeholder="auto"></label>
+      </div>
+      <div class="hint" data-i18n="watts_hint"></div>
+    </details>
+
+    <details class="card" open>
+      <summary data-i18n="settings"></summary>
+      <div class="row">
+        <div class="label" data-i18n="intensity"></div>
+        <div class="seg" id="seg-int">
+          <button data-v="25" data-i18n="int_25"></button>
+          <button data-v="50" data-i18n="int_50"></button>
+          <button data-v="100" data-i18n="int_100"></button>
+        </div>
+        <div class="hint" id="int-hint"></div>
+        <div class="hint" id="cpu-hint"></div>
+      </div>
+      <label class="row toggle"><input type="checkbox" id="t-idle"><span data-i18n="idle_only"></span></label>
+      <div class="row indent" id="idle-row">
+        <span id="idle-after-label"></span>
+        <input type="range" id="r-idle" min="1" max="30" step="1">
+      </div>
+      <label class="row toggle"><input type="checkbox" id="t-fullscreen"><span data-i18n="pause_fullscreen"></span></label>
+      <label class="row toggle"><input type="checkbox" id="t-gpu"><span data-i18n="gpu"></span></label>
+      <div class="hint indent" id="gpu-hint" data-i18n="gpu_hint"></div>
+      <label class="row toggle"><input type="checkbox" id="t-auto"><span data-i18n="autostart"></span></label>
+      <label class="row toggle" id="row-login"><input type="checkbox" id="t-login"><span data-i18n="login"></span></label>
+      <div class="row">
+        <div class="label" data-i18n="lang"></div>
+        <select id="sel-lang" aria-label="Language"></select>
+      </div>
+      <div class="row">
+        <button class="btn" id="b-update" data-i18n="upd_check"></button>
+        <div class="hint" id="upd-hint"></div>
+      </div>
+      <label class="row toggle"><input type="checkbox" id="t-telemetry"><span data-i18n="telemetry"></span></label>
+      <div class="hint indent" data-i18n="telemetry_hint"></div>
+      <div class="hint" data-i18n="elec_hint"></div>
+    </details>
+
+    <details class="card" id="card-ref">
+      <summary data-i18n="referral"></summary>
+      <div class="hint" id="ref-hint"></div>
+      <div class="addr" id="ref-code">—</div>
+      <div class="btns"><button class="btn" id="b-ref-copy" data-i18n="copy"></button></div>
+      <label><span class="label" data-i18n="referral_enter"></span><input type="text" id="i-ref" autocomplete="off" spellcheck="false"></label>
+      <div class="hint" id="ref-status"></div>
+      <div class="err hidden" id="ref-err" data-i18n="referral_bad"></div>
+      <div class="btns">
+        <button class="btn primary" id="b-ref-save" data-i18n="referral_save"></button>
+        <button class="btn hidden" id="b-ref-remove" data-i18n="referral_remove"></button>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary data-i18n="wallet"></summary>
+      <div class="addr" id="addr">—</div>
+      <div class="hint hidden" id="addr-external" data-i18n="external_wallet"></div>
+      <div class="btns">
+        <button class="btn" id="b-copy" data-i18n="copy"></button>
+        <button class="btn" id="b-connect" data-i18n="connect"></button>
+        <button class="btn" id="b-pool" data-i18n="pool_stats"></button>
+        <button class="btn" id="b-backup" data-i18n="backup"></button>
+        <button class="btn" id="b-sell" data-i18n="sell"></button>
+      </div>
+      <div class="hint" data-i18n="tax_note"></div>
+    </details>
+
+    <details class="card">
+      <summary data-i18n="logs"></summary>
+      <pre id="log"></pre>
+    </details>
+
+    <footer>
+      <span id="fee-line"></span>
+      <span><button class="linkbtn" id="b-terms" data-i18n="terms_link"></button> <button class="linkbtn" id="b-quit" data-i18n="quit"></button></span>
+    </footer>
+  </section>
+
+  <!-- MODALES -->
+  <div id="modal-backup" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="box">
+      <h2 data-i18n="backup"></h2>
+      <p class="warn" data-i18n="backup_warn"></p>
+      <div class="seed" id="seed">…</div>
+      <div class="btns">
+        <button class="btn" id="seed-copy" data-i18n="copy"></button>
+        <button class="btn primary" id="seed-done" data-i18n="backup_done"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-connect" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="box">
+      <h2 data-i18n="connect_title"></h2>
+      <p class="hint" data-i18n="connect_p1"></p>
+      <div class="qr-wrap"><img id="qr" alt="QR" width="180" height="180"></div>
+      <p class="hint" data-i18n="qr_hint"></p>
+      <div class="btns">
+        <button class="btn" id="connect-wallet" data-i18n="open_wallet"></button>
+        <button class="btn" id="connect-backup" data-i18n="backup"></button>
+      </div>
+      <p class="hint" data-i18n="connect_p2"></p>
+      <div class="btns">
+        <button class="btn" id="connect-other" data-i18n="use_other"></button>
+        <button class="btn primary" id="connect-close" data-i18n="close"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-change" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="box">
+      <h2 data-i18n="change_title"></h2>
+      <p class="hint" data-i18n="change_hint"></p>
+      <input id="change-input" type="text" autocomplete="off" spellcheck="false">
+      <div class="err hidden" id="change-err" data-i18n="change_bad"></div>
+      <div class="btns">
+        <button class="btn" id="change-cancel" data-i18n="cancel"></button>
+        <button class="btn primary" id="change-ok" data-i18n="change_ok"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-sell" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="box">
+      <h2 data-i18n="sell"></h2>
+      <div class="btns" id="sell-links"></div>
+      <div class="btns"><button class="btn" id="sell-close" data-i18n="close"></button></div>
+    </div>
+  </div>
+
+  <div id="modal-terms" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="box">
+      <h2 data-i18n="terms"></h2>
+      <p class="hint" id="terms-text"></p>
+      <p class="hint" data-i18n="privacy_text"></p>
+      <div class="btns"><button class="btn primary" id="terms-ok" data-i18n="terms_accept"></button></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

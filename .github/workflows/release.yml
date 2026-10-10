@@ -1,0 +1,49 @@
+# Build + release automatiques.
+#  - push d'un tag v* (ex. v0.2.0) → build Windows (installateur NSIS un clic + portable) et Linux (AppImage),
+#    puis publication sur GitHub Releases. electron-updater lit ces releases pour les mises à jour auto.
+#  - Signature Windows : ajoute les secrets WIN_CSC_LINK (certificat .pfx en base64) et WIN_CSC_KEY_PASSWORD,
+#    ou AZURE_* pour Azure Trusted Signing (voir docs/signature-code.md). Sans secrets, l'exe n'est pas signé.
+name: release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: xvfb-run -a npm run test:ui
+  windows:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Build + publish (NSIS + portable)
+        run: npx electron-builder --win --x64 --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with: { name: windows, path: "dist/*.exe" }
+  linux:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx electron-builder --linux AppImage --x64 --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

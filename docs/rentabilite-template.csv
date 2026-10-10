@@ -1,0 +1,5 @@
+machine,cpu,gpu,cpu_version_journal,mode,puissance,epoch,solde_debut_qubic,solde_fin_qubic,qubic_gagnes,kwh_mesures,prix_kwh_eur,cours_moyen_eur,brut_eur,electricite_eur,net_eur_jour,vitesse_moy_it_s,temp_max_c,remarques
+PC1,AMD Ryzen 7 7700X,aucun,AVX512,toujours,max,235,0,,,,0.20,,,,,,,
+PC2,AMD Ryzen 9 7950X,aucun,AVX512,toujours,max,235,0,,,,0.20,,,,,,,
+PC3,Intel i7-14700K,RTX 4070,AVX2,toujours,max,235,0,,,,0.20,,,,,,,
+PC1,AMD Ryzen 7 7700X,aucun,AVX512,inactif,moyenne,236,,,,,0.20,,,,,,,

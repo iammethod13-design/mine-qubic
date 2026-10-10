@@ -1,0 +1,29 @@
+'use strict';
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('mq', {
+  init: () => ipcRenderer.invoke('app:init'),
+  start: () => ipcRenderer.invoke('miner:start'),
+  stop: () => ipcRenderer.invoke('miner:stop'),
+  setSettings: (patch) => ipcRenderer.invoke('settings:set', patch),
+  createWallet: () => ipcRenderer.invoke('wallet:create'),
+  importWallet: (data) => ipcRenderer.invoke('wallet:import', data),
+  revealSeed: () => ipcRenderer.invoke('wallet:reveal'),
+  verifyId: (id) => ipcRenderer.invoke('wallet:verify', id),
+  walletQr: () => ipcRenderer.invoke('wallet:qr'),
+  setReferral: (id) => ipcRenderer.invoke('referral:set', id),
+  estimate: () => ipcRenderer.invoke('chain:estimate'),
+  checkUpdate: () => ipcRenderer.invoke('app:checkUpdate'),
+  installUpdate: () => ipcRenderer.invoke('app:installUpdate'),
+  balance: () => ipcRenderer.invoke('chain:balance'),
+  openExternal: (url) => ipcRenderer.invoke('app:openExternal', url),
+  copy: (t) => ipcRenderer.invoke('app:copy', t),
+  lines: () => ipcRenderer.invoke('app:lines'),
+  quit: () => ipcRenderer.invoke('app:quit'),
+  onStatus: (cb) => ipcRenderer.on('status', (_e, s) => cb(s)),
+  onLine: (cb) => ipcRenderer.on('line', (_e, l) => cb(l)),
+  onWallet: (cb) => ipcRenderer.on('wallet:changed', (_e, w) => cb(w)),
+  onSys: (cb) => ipcRenderer.on('sys', (_e, s) => cb(s)),
+  onAppUpdate: (cb) => ipcRenderer.on('appUpdate', (_e, u) => cb(u)),
+  onPayout: (cb) => ipcRenderer.on('payout', (_e, p) => cb(p)),
+});

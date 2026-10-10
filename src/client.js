@@ -198,26 +198,42 @@ class MinerClient extends EventEmitter {
     if (this.lines.length > 400) this.lines.shift();
     this.emit('line', line);
 
-    const m = line.match(/(\d+(?:[.,]\d+)?)\s*(k|M)?it\/s/i);
-    if (m) {
-      let v = parseFloat(m[1].replace(',', '.'));
-      if (m[2]) v *= m[2].toLowerCase() === 'k' ? 1e3 : 1e6;
-      this.stats.hashrate = v;
+    // Format qubic.li 3.9.x : "E:234 | SHARES: 3/5 (R:0) | [AVX512] 21 it/s | 22 avg it/s"
+    //   (avec DisplayDetailedHashrates : "[AVX512] 21 it/s [CUDA] 500 it/s" → on additionne)
+    let m = null;
+    const rates = [...line.matchAll(/\[([A-Z0-9]+)\]\s*(\d+(?:[.,]\d+)?)\s*(k|M)?it\/s/gi)];
+    if (rates.length) {
+      let total = 0;
+      for (const r of rates) { let v = parseFloat(r[2].replace(',', '.')); if (r[3]) v *= r[3].toLowerCase() === 'k' ? 1e3 : 1e6; total += v; }
+      this.stats.hashrate = total; m = rates[0];
+      const avg = line.match(/(\d+(?:[.,]\d+)?)\s*(k|M)?\s*avg it\/s/i);
+      if (avg) { let v = parseFloat(avg[1].replace(',', '.')); if (avg[2]) v *= avg[2].toLowerCase() === 'k' ? 1e3 : 1e6; this.stats.avgHashrate = v; }
+    } else {
+      m = line.match(/(\d+(?:[.,]\d+)?)\s*(k|M)?it\/s/i);
+      if (m && !/avg it\/s/i.test(line.slice(0, m.index + m[0].length)) ) {
+        let v = parseFloat(m[1].replace(',', '.'));
+        if (m[2]) v *= m[2].toLowerCase() === 'k' ? 1e3 : 1e6;
+        this.stats.hashrate = v;
+      }
     }
-    const s = line.match(/\bsol(?:ution)?s?\b[^\d]{0,4}(\d+)/i);
-    if (s) this.stats.sols = parseInt(s[1], 10);
-    const sh = line.match(/\bshares?\b[^\d]{0,4}(\d+)/i);
-    if (sh) this.stats.shares = parseInt(sh[1], 10);
-
+    const ep = line.match(/\bE:(\d+)\b/); if (ep) this.stats.epoch = parseInt(ep[1], 10);
     const cpu = line.match(/^CPU:\s*Enabled with (\w+)/i);
     if (cpu) { this.stats.cpuVersion = cpu[1].toUpperCase(); this.emit('sysinfo', { cpuVersion: this.stats.cpuVersion }); }
-    if (/(outdated|update required|unsupported (client )?version|too old|please update)/i.test(line) && !/AutoUpdate/i.test(line)) {
-      this.emit('status', { state: 'outdated' });
-    }
+    if (/(outdated|update required|unsupported (client )?version|too old|please update)/i.test(line) && !/AutoUpdate/i.test(line)) this.emit('status', { state: 'outdated' });
+    const sh = line.match(/SHARES:\s*(\d+)\/(\d+)/i);
+    if (sh) { this.stats.shares = parseInt(sh[1], 10); this.stats.sharesTotal = parseInt(sh[2], 10); }
+    const s = !sh && line.match(/\bsol(?:ution)?s?\b[^\d]{0,4}(\d+)/i);
+    if (s) this.stats.sols = parseInt(s[1], 10);
+    if (sh) this.stats.sols = this.stats.shares;
     if (/Pool connection established/i.test(line)) { this.stats.connected = true; this.emit('status', { state: 'running' }); }
-    if (/AUTHENTICATION FAILED/i.test(line)) { this.stats.connected = false; this.emit('status', { state: 'error', error: 'auth_failed' }); }
+    if (/AUTHENTICATION FAILED/i.test(line)) {
+      // Avec un client trop ancien, le pool refuse l'authentification : on tente d'abord une mise à jour.
+      this.stats.connected = false;
+      this.emit('status', { state: 'outdated', error: 'auth_failed' });
+    }
     if (/Connecting to pool/i.test(line) && !this.stats.connected) this.emit('status', { state: 'connecting' });
-    if (/download/i.test(line) && /trainer|runner/i.test(line)) this.emit('status', { state: 'preparing' });
+    if (/not running or has exited\. Starting the process|downloading|Downloading/i.test(line) && /worker|trainer|runner|download/i.test(line)) this.emit('status', { state: 'preparing' });
+    if (m && this.stats.connected && this.stats.hashrate > 0) this.emit('status', { state: 'running' }); // fin de la préparation du trainer
     if (m || s || sh) this.emit('stats', { ...this.stats });
   }
 

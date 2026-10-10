@@ -38,7 +38,7 @@ Trois mécanismes, du plus automatique au plus manuel :
 |---|---|
 | `OPERATOR_ADDRESS` | Ton adresse Qubic (60 lettres). Vide = aucun frais. |
 | `DEV_FEE_PERCENT` / `DEV_FEE_SLICE_MINUTES` | 3 % et 5 min par défaut. |
-| `CLIENT.win32.url / sha256` | Renseignés pour qli-Client 3.8.10. À mettre à jour à chaque release (hash : `certutil -hashfile x SHA256`). |
+| `CLIENT.win32.url / sha256` | Renseignés pour qli-Client 3.9.1. À mettre à jour à chaque release (hash : `certutil -hashfile x SHA256`). |
 | `REMOTE_MANIFEST_URL` | URL d'un JSON que tu héberges, pour pousser une version du client sans rebuilder. |
 | `APP_UPDATE` | `owner` + `repo` GitHub pour les mises à jour automatiques de l'app. |
 | `EXCHANGES` | Tes liens d'affiliation pour « Vendre mes QUBIC ». |
@@ -70,7 +70,6 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 ### Reste à faire (et par qui)
 | # | Quoi | Qui | Doc |
 |---|---|---|---|
-| 1 | Lancer `test-pool.bat` sur ton PC et me donner `pooltest.log` (authentification au pool + format des lignes de hashrate) | toi, 2 min | ci-dessous |
 | 2 | Créer le dépôt GitHub, remplir `owner`, pousser, taguer `v0.2.0` | toi, 5 min | `docs/publier-sur-github.md` |
 | 3 | Certificat de signature (Azure Trusted Signing ~10 $/mois) + soumission Defender | toi, 1-5 jours de délai | `docs/signature-code.md` |
 | 4 | Faire relire CGU/confidentialité par un juriste, remplir l'entité et l'e-mail de contact | toi | `docs/cgu.md`, `docs/confidentialite.md` |
@@ -80,11 +79,11 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 | 8 | Accord écrit de Qubic pour l'usage du logo dans une app tierce | toi | |
 | 9 | macOS : pas de client qubic.li macOS, à attendre | — | |
 
-## À vérifier en premier sur ton PC
+## Validé sur ton PC (10 oct. 2026)
 
-1. **Authentification au pool.** Depuis mon environnement, le client se connecte à `wss://wps.qubic.li` mais reçoit `AUTHENTICATION FAILED` (« no AuthenticateResponse ») — très probablement le proxy du bac à sable qui ne laisse pas passer les trames WebSocket. Ouvre le « Journal technique » : tu dois voir `Pool connection established` puis des lignes de hashrate. Si l'erreur apparaît aussi chez toi, qubic.li a durci le mode registerless ; on passera alors sur un mode « token » (compte qubic.li de l'opérateur + alias par utilisateur, mais ça devient custodial).
-2. **Lignes de hashrate** : envoie-moi 20 lignes du journal, j'ajuste le parseur.
-3. **Rentabilité** : une epoch complète (mercredi → mercredi), solde gagné vs conso mesurée.
+- Le client **3.8.10** était refusé par le pool (`AUTHENTICATION FAILED`) : version trop ancienne. Avec **3.9.1**, le mode sans compte fonctionne : connexion, authentification, téléchargement du trainer, minage (≈ 10 it/s par thread AVX-512 sur la machine de test). L'app épingle désormais 3.9.1, et traite un refus d'authentification comme un signal de mise à jour du mineur.
+- Format des lignes de vitesse (3.9.x) : `E:234 | SHARES: 3/5 (R:0) | [AVX512] 22 it/s | 21 avg it/s` — parsé (CPU + GPU additionnés, epoch, shares).
+- Ta machine de test : Ryzen 7 7435HS (AVX2 seulement, pas d'AVX-512), 16 Go, RTX 3050 Laptop. Les Ryzen 7000 "HS" (Zen 3+) n'ont pas l'AVX-512 : attends-toi à une vitesse nettement inférieure à un Ryzen 7000 de bureau.
 
 ## Structure
 

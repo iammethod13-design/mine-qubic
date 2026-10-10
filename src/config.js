@@ -32,15 +32,15 @@ module.exports = {
   // Les hashes SHA-256 sont vérifiés avant extraction : si qubic.li publie une
   // nouvelle version, mets à jour url + sha256 ici (ou via REMOTE_MANIFEST_URL).
   CLIENT: {
-    version: '3.8.10',
+    version: '3.9.1',
     win32: {
-      url: 'https://dl.qubic.li/downloads/qli-Client-3.8.10-Windows-x64.zip',
-      sha256: 'b4bf0bcd1f2b190a8228663c7a35bb72520c0a8b919fae8017284c16f1bfe800',
+      url: 'https://dl.qubic.li/downloads/qli-Client-3.9.1-Windows-x64.zip',
+      sha256: '0c6cc3ec5ecb2cffb910f3fe61f4031da09d89676ef6bdd2caa0da61d49ab09a',
       exe: 'qli-Client.exe',
     },
     linux: {
-      url: 'https://dl.qubic.li/downloads/qli-Client-3.8.10-Linux-x64.tar.gz',
-      sha256: '08385d75f1ab4861edaf8462c3c7aa4a6343c1d068a9bf6ea94c2096eae62113',
+      url: 'https://dl.qubic.li/downloads/qli-Client-3.9.1-Linux-x64.tar.gz',
+      sha256: '127101cdf726cc0116bb981c78260b8583b377fec0ded54acafebd6174f1c340',
       exe: 'qli-Client',
     },
   },

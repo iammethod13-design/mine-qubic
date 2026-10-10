@@ -127,7 +127,8 @@
   "a11y_bigbtn_stop": "Arrêter le minage",
   "a11y_close": "Fermer la fenêtre",
   "onboard_consent": "En cliquant sur Démarrer, tu acceptes les {terms}.",
-  "terms_word": "conditions d'utilisation"
+  "terms_word": "conditions d'utilisation",
+  "err_client_outdated": "Le pool refuse cette version du mineur et la mise à jour automatique a échoué. Réessaie plus tard, ou mets l'app à jour."
  },
  "en": {
   "onboard_title": "Your PC mines QUBIC.",
@@ -255,7 +256,8 @@
   "a11y_bigbtn_stop": "Stop mining",
   "a11y_close": "Close window",
   "onboard_consent": "By clicking Start, you accept the {terms}.",
-  "terms_word": "terms of use"
+  "terms_word": "terms of use",
+  "err_client_outdated": "The pool rejects this miner version and the automatic update failed. Try again later, or update the app."
  },
  "es": {
   "onboard_title": "Tu PC mina QUBIC.",
@@ -383,7 +385,8 @@
   "a11y_bigbtn_stop": "Detener el minado",
   "a11y_close": "Cerrar la ventana",
   "onboard_consent": "Al pulsar Empezar aceptas las {terms}.",
-  "terms_word": "condiciones de uso"
+  "terms_word": "condiciones de uso",
+  "err_client_outdated": "El pool rechaza esta versión del minero y la actualización automática falló. Inténtalo más tarde o actualiza la app."
  },
  "pt": {
   "onboard_title": "Seu PC minera QUBIC.",
@@ -511,7 +514,8 @@
   "a11y_bigbtn_stop": "Parar de minerar",
   "a11y_close": "Fechar a janela",
   "onboard_consent": "Ao clicar em Começar, você aceita os {terms}.",
-  "terms_word": "termos de uso"
+  "terms_word": "termos de uso",
+  "err_client_outdated": "O pool recusa esta versão do minerador e a atualização automática falhou. Tente mais tarde ou atualize o app."
  },
  "de": {
   "onboard_title": "Dein PC schürft QUBIC.",
@@ -639,7 +643,8 @@
   "a11y_bigbtn_stop": "Mining stoppen",
   "a11y_close": "Fenster schließen",
   "onboard_consent": "Mit Klick auf Starten akzeptierst du die {terms}.",
-  "terms_word": "Nutzungsbedingungen"
+  "terms_word": "Nutzungsbedingungen",
+  "err_client_outdated": "Der Pool lehnt diese Miner-Version ab und das automatische Update ist fehlgeschlagen. Versuche es später erneut oder aktualisiere die App."
  },
  "it": {
   "onboard_title": "Il tuo PC mina QUBIC.",
@@ -767,7 +772,8 @@
   "a11y_bigbtn_stop": "Ferma il mining",
   "a11y_close": "Chiudi la finestra",
   "onboard_consent": "Cliccando su Avvia accetti le {terms}.",
-  "terms_word": "condizioni d'uso"
+  "terms_word": "condizioni d'uso",
+  "err_client_outdated": "Il pool rifiuta questa versione del miner e l'aggiornamento automatico è fallito. Riprova più tardi o aggiorna l'app."
  },
  "ru": {
   "onboard_title": "Твой ПК майнит QUBIC.",
@@ -895,7 +901,8 @@
   "a11y_bigbtn_stop": "Остановить майнинг",
   "a11y_close": "Закрыть окно",
   "onboard_consent": "Нажимая «Начать», ты принимаешь {terms}.",
-  "terms_word": "условия использования"
+  "terms_word": "условия использования",
+  "err_client_outdated": "Пул отклоняет эту версию майнера, и автообновление не удалось. Попробуй позже или обнови приложение."
  },
  "zh": {
   "onboard_title": "你的电脑在挖 QUBIC。",
@@ -1023,7 +1030,8 @@
   "a11y_bigbtn_stop": "停止挖矿",
   "a11y_close": "关闭窗口",
   "onboard_consent": "点击“开始”即表示你接受{terms}。",
-  "terms_word": "使用条款"
+  "terms_word": "使用条款",
+  "err_client_outdated": "矿池拒绝此矿工版本，且自动更新失败。请稍后重试或更新应用。"
  },
  "ja": {
   "onboard_title": "あなたのPCがQUBICをマイニング。",
@@ -1151,7 +1159,8 @@
   "a11y_bigbtn_stop": "マイニングを停止",
   "a11y_close": "ウィンドウを閉じる",
   "onboard_consent": "「開始」を押すと{terms}に同意したことになります。",
-  "terms_word": "利用規約"
+  "terms_word": "利用規約",
+  "err_client_outdated": "プールはこのマイナーのバージョンを拒否し、自動更新に失敗しました。後でもう一度試すか、アプリを更新してください。"
  },
  "ko": {
   "onboard_title": "내 PC가 QUBIC을 채굴합니다.",
@@ -1279,7 +1288,8 @@
   "a11y_bigbtn_stop": "채굴 중지",
   "a11y_close": "창 닫기",
   "onboard_consent": "시작을 누르면 {terms}에 동의하는 것입니다.",
-  "terms_word": "이용 약관"
+  "terms_word": "이용 약관",
+  "err_client_outdated": "풀이 이 채굴기 버전을 거부했고 자동 업데이트가 실패했습니다. 나중에 다시 시도하거나 앱을 업데이트하세요."
  },
  "tr": {
   "onboard_title": "PC'n QUBIC kazıyor.",
@@ -1407,7 +1417,8 @@
   "a11y_bigbtn_stop": "Madenciliği durdur",
   "a11y_close": "Pencereyi kapat",
   "onboard_consent": "Başlat'a tıklayarak {terms} kabul etmiş olursun.",
-  "terms_word": "kullanım koşullarını"
+  "terms_word": "kullanım koşullarını",
+  "err_client_outdated": "Havuz bu madenci sürümünü reddediyor ve otomatik güncelleme başarısız oldu. Daha sonra tekrar dene veya uygulamayı güncelle."
  },
  "id": {
   "onboard_title": "PC-mu menambang QUBIC.",
@@ -1535,7 +1546,8 @@
   "a11y_bigbtn_stop": "Berhenti menambang",
   "a11y_close": "Tutup jendela",
   "onboard_consent": "Dengan mengklik Mulai, kamu menyetujui {terms}.",
-  "terms_word": "ketentuan penggunaan"
+  "terms_word": "ketentuan penggunaan",
+  "err_client_outdated": "Pool menolak versi penambang ini dan pembaruan otomatis gagal. Coba lagi nanti atau perbarui aplikasi."
  },
  "vi": {
   "onboard_title": "PC của bạn đào QUBIC.",
@@ -1663,7 +1675,8 @@
   "a11y_bigbtn_stop": "Dừng đào",
   "a11y_close": "Đóng cửa sổ",
   "onboard_consent": "Khi nhấn Bắt đầu, bạn chấp nhận {terms}.",
-  "terms_word": "điều khoản sử dụng"
+  "terms_word": "điều khoản sử dụng",
+  "err_client_outdated": "Pool từ chối phiên bản trình đào này và cập nhật tự động thất bại. Thử lại sau hoặc cập nhật ứng dụng."
  },
  "ar": {
   "onboard_title": "حاسوبك يُعدّن QUBIC.",
@@ -1791,7 +1804,8 @@
   "a11y_bigbtn_stop": "إيقاف التعدين",
   "a11y_close": "إغلاق النافذة",
   "onboard_consent": "بالنقر على «ابدأ» فإنك توافق على {terms}.",
-  "terms_word": "شروط الاستخدام"
+  "terms_word": "شروط الاستخدام",
+  "err_client_outdated": "يرفض المجمّع هذا الإصدار من المُعدِّن وفشل التحديث التلقائي. حاول لاحقاً أو حدّث التطبيق."
  },
  "hi": {
   "onboard_title": "आपका PC QUBIC माइन करता है।",
@@ -1919,7 +1933,8 @@
   "a11y_bigbtn_stop": "माइनिंग रोकें",
   "a11y_close": "विंडो बंद करें",
   "onboard_consent": "शुरू करें पर क्लिक करके आप {terms} स्वीकार करते हैं।",
-  "terms_word": "उपयोग की शर्तें"
+  "terms_word": "उपयोग की शर्तें",
+  "err_client_outdated": "पूल इस माइनर संस्करण को अस्वीकार करता है और स्वचालित अपडेट विफल रहा। बाद में फिर कोशिश करें या ऐप अपडेट करें।"
  }
 };
   I18N.__names = {"fr": "Français", "en": "English", "es": "Español", "pt": "Português (BR)", "de": "Deutsch", "it": "Italiano", "ru": "Русский", "zh": "简体中文", "ja": "日本語", "ko": "한국어", "tr": "Türkçe", "id": "Bahasa Indonesia", "vi": "Tiếng Việt", "ar": "العربية", "hi": "हिन्दी"};

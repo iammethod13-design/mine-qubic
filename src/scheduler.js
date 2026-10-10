@@ -37,7 +37,7 @@ class Scheduler extends EventEmitter {
     this._busy = false;
 
     client.on('status', (s) => {
-      if (s.state === 'outdated') { this.updateClient('pool_rejected_version'); return; }
+      if (s.state === 'outdated') { this.updateClient(s.error === 'auth_failed' ? 'auth_failed' : 'pool_rejected_version'); return; }
       if (s.state === 'running' && this.slice !== 'user') this._setState('devfee');
       else if (s.state === 'error') { this.error = s.error; this._setState('error'); }
       else if (s.state === 'downloading') { this.progress = s.progress; this._setState('downloading'); }
@@ -134,10 +134,10 @@ class Scheduler extends EventEmitter {
       if (!this.wanted) return;
       // si le manifest n'a rien de neuf et que le pool rejette quand même la version :
       // on réinstalle la version épinglée (le client se mettra à jour tout seul via AutoUpdate)
-      if (reason === 'pool_rejected_version' && this.client.isInstalled()) {
+      if ((reason === 'pool_rejected_version' || reason === 'auth_failed') && this.client.isInstalled()) {
         this.pendingReinstalls = (this.pendingReinstalls || 0) + 1;
         if (this.pendingReinstalls <= 2) this.client.uninstall();
-        else { this.error = 'client_outdated'; this._setState('error'); this.wanted = false; return; }
+        else { this.error = reason === 'auth_failed' ? 'auth_failed' : 'client_outdated'; this._setState('error'); this.wanted = false; return; }
       }
       await this._tick();
     } finally { this._updating = false; }

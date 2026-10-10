@@ -1430,6 +1430,12 @@ for _l in CONSENT:
     T[_l]['onboard_consent'] = CONSENT[_l]
     T[_l]['terms_word'] = TERMS_WORD[_l]
 
+
+# ---- v0.2.2 ----
+OUTDATED = {'fr': "Le pool refuse cette version du mineur et la mise à jour automatique a échoué. Réessaie plus tard, ou mets l'app à jour.", 'en': 'The pool rejects this miner version and the automatic update failed. Try again later, or update the app.', 'es': 'El pool rechaza esta versión del minero y la actualización automática falló. Inténtalo más tarde o actualiza la app.', 'pt': 'O pool recusa esta versão do minerador e a atualização automática falhou. Tente mais tarde ou atualize o app.', 'de': 'Der Pool lehnt diese Miner-Version ab und das automatische Update ist fehlgeschlagen. Versuche es später erneut oder aktualisiere die App.', 'it': "Il pool rifiuta questa versione del miner e l'aggiornamento automatico è fallito. Riprova più tardi o aggiorna l'app.", 'ru': 'Пул отклоняет эту версию майнера, и автообновление не удалось. Попробуй позже или обнови приложение.', 'zh': '矿池拒绝此矿工版本，且自动更新失败。请稍后重试或更新应用。', 'ja': 'プールはこのマイナーのバージョンを拒否し、自動更新に失敗しました。後でもう一度試すか、アプリを更新してください。', 'ko': '풀이 이 채굴기 버전을 거부했고 자동 업데이트가 실패했습니다. 나중에 다시 시도하거나 앱을 업데이트하세요.', 'tr': 'Havuz bu madenci sürümünü reddediyor ve otomatik güncelleme başarısız oldu. Daha sonra tekrar dene veya uygulamayı güncelle.', 'id': 'Pool menolak versi penambang ini dan pembaruan otomatis gagal. Coba lagi nanti atau perbarui aplikasi.', 'vi': 'Pool từ chối phiên bản trình đào này và cập nhật tự động thất bại. Thử lại sau hoặc cập nhật ứng dụng.', 'ar': 'يرفض المجمّع هذا الإصدار من المُعدِّن وفشل التحديث التلقائي. حاول لاحقاً أو حدّث التطبيق.', 'hi': 'पूल इस माइनर संस्करण को अस्वीकार करता है और स्वचालित अपडेट विफल रहा। बाद में फिर कोशिश करें या ऐप अपडेट करें।'}
+for _l in OUTDATED:
+    T[_l]['err_client_outdated'] = OUTDATED[_l]
+
 if __name__ == '__main__':
     ref = set(T['fr'])
     for k, v in T.items():

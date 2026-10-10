@@ -34,6 +34,8 @@ async function run() {
   assert.match(addr, /^[A-Z]{60}$/); ok('wallet créé : ' + addr.slice(0, 8) + '…');
   const label = await js(`document.getElementById('state-label').textContent`);
   assert.ok(/Minage en cours|Mining/.test(label), 'état = ' + label); ok('minage démarré (mock) : ' + label);
+  assert.strictEqual(await js(`document.documentElement.lang`), 'en'); ok('anglais par défaut');
+  assert.strictEqual(await js(`document.getElementById('sel-lang').options[0].value`), 'en'); ok('anglais en tête de liste');
   const speed = await js(`document.getElementById('s-speed').textContent`);
   assert.ok(/it\/s/.test(speed)); ok('vitesse affichée : ' + speed);
   assert.strictEqual(await js(`document.getElementById('bigbtn').getAttribute('aria-pressed')`), 'true'); ok('aria-pressed');

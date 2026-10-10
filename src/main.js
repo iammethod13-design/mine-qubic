@@ -212,11 +212,6 @@ function setupIpc() {
     store.set({ referrer: id });
     return { ok: true, referrer: id };
   });
-  ipcMain.handle('chain:estimate', async () => {
-    const price = await chain.getPrice();
-    const snap = scheduler.snapshot();
-    return chain.estimate({ history: store.get('balanceHistory') || [], priceEur: price && price.eur, threads: snap.threads, gpu: !!store.get('gpu'), kwhPrice: store.get('kwhPrice'), wattsOverride: store.get('watts') });
-  });
   ipcMain.handle('wallet:qr', async () => {
     const w = store.get('wallet');
     if (!w) return null;

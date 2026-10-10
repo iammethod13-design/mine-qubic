@@ -12,7 +12,6 @@ contextBridge.exposeInMainWorld('mq', {
   verifyId: (id) => ipcRenderer.invoke('wallet:verify', id),
   walletQr: () => ipcRenderer.invoke('wallet:qr'),
   setReferral: (id) => ipcRenderer.invoke('referral:set', id),
-  estimate: () => ipcRenderer.invoke('chain:estimate'),
   checkUpdate: () => ipcRenderer.invoke('app:checkUpdate'),
   installUpdate: () => ipcRenderer.invoke('app:installUpdate'),
   balance: () => ipcRenderer.invoke('chain:balance'),

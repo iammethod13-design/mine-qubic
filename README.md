@@ -1,6 +1,6 @@
 # Mine Qubic — « je clique et ça mine »
 
-Application Windows (Electron) qui fait miner du QUBIC à un PC ordinaire sur le pool **qubic.li**, sans compte, sans configuration. Non-custodial : chaque utilisateur a son propre wallet Qubic, créé dans l'app, et le pool le paie directement chaque semaine. Interface en **15 langues** (FR, EN, ES, PT-BR, DE, IT, RU, ZH, JA, KO, TR, ID, VI, AR, HI), marque Qubic officielle (brand kit).
+Application Windows (Electron) qui fait miner du QUBIC à un PC ordinaire sur le pool **qubic.li**, sans compte, sans configuration. Non-custodial : chaque utilisateur a son propre wallet Qubic, créé dans l'app, et le pool le paie directement chaque semaine. Interface en **15 langues**, anglais par défaut (EN, FR, ES, PT-BR, DE, IT, RU, ZH, JA, KO, TR, ID, VI, AR, HI), marque Qubic officielle (brand kit).
 
 ```
 Utilisateur ──clic──▶ Mine Qubic ──lance──▶ qli-Client (officiel) ──▶ pool qubic.li ──paie──▶ wallet de l'utilisateur
@@ -61,7 +61,7 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 - Onboarding 1 clic, wallet local chiffré, téléchargement vérifié du client, lancement/arrêt propre, redémarrage auto.
 - Mode inactif, 3 niveaux de puissance, GPU optionnel (détection NVIDIA), **pause automatique quand un jeu ou une vidéo est en plein écran** (Windows), démarrage avec Windows, tray traduit.
 - Dev fee 3 % par tranches, persistant et affiché. **Parrainage non-custodial** : le code de parrainage est l'adresse Qubic ; 20 % des frais (1 min sur 5) sont minés pour le parrain, payés par le pool. Aucun backend.
-- Gains on-chain + € + notification de paiement + **estimation €/jour nette** (dernier(s) paiement(s) du pool ÷ 7 − électricité, avec prix du kWh et watts réglables).
+- Gains on-chain + contre-valeur € du solde + notification de paiement. Aucune prévision de gains (retirée en 0.3.0 à la demande de PL).
 - Mises à jour : client (AutoUpdate + manifest distant + rejet du pool) et app (electron-updater + GitHub Releases, workflow fourni).
 - Connexion wallet : QR, wallet.qubic.org, export seed, import adresse/seed.
 - 15 langues, RTL, détection de la langue de Windows. CGU + confidentialité affichées au premier lancement et dans l'app.
@@ -78,7 +78,7 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 | 6 | Endpoint de télémétrie (optionnel : un simple webhook/Google Sheet) → `TELEMETRY_URL` | toi, 30 min | |
 | 7 | Relecture des 13 traductions non FR/EN par des natifs (le ton, pas le sens) | ton réseau Cointribune | `scripts/i18n_src.py` |
 | 8 | Accord écrit de Qubic pour l'usage du logo dans une app tierce | toi | |
-| 9 | macOS : pas de client qubic.li macOS, à attendre | — | |
+| 9 | Mac : pas de mineur Qubic pour macOS (ni qubic.li, ni apool, ni rqiner) → demander un build à qubic.li. iPhone/iPad : impossible (App Store 2.4.2). Android : app officielle qubic.li (APK), même adresse → mêmes paiements ; une app Mine Qubic Android demanderait de réécrire l'app autour de leur client (gros chantier, gains minuscules sur téléphone). | — | |
 
 ## Validé sur ton PC (10 oct. 2026)
 

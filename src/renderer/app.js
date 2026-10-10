@@ -34,7 +34,6 @@
     renderStatus();
     renderSys();
     renderUpdate(C.appUpdate);
-    renderEstimate();
   }
 
   function fillLangSelects() {
@@ -132,8 +131,6 @@
     $('t-fullscreen').checked = S.pauseFullscreen !== false;
     $('t-telemetry').checked = !!S.telemetry;
     $('row-login').style.display = C.platform === 'linux' ? 'none' : '';
-    if (document.activeElement !== $('i-kwh')) $('i-kwh').value = S.kwhPrice != null ? S.kwhPrice : 0.2;
-    if (document.activeElement !== $('i-watts')) $('i-watts').value = S.watts != null ? S.watts : '';
     renderWallet();
     renderReferral();
   }
@@ -145,20 +142,6 @@
     if (document.activeElement !== $('i-ref')) $('i-ref').value = S.referrer || '';
   }
 
-  async function renderEstimate() {
-    try {
-      const e = await window.mq.estimate();
-      const has = e && e.netDay != null;
-      $('est-none').classList.toggle('hidden', !!has);
-      $('est-lines').classList.toggle('hidden', !has);
-      if (!has) return;
-      const price = e.lastPayout && e.grossDay != null ? (e.grossDay * 7 / (e.lastPayout.qubic || 1)) : 0;
-      $('est-last').textContent = t('est_last', { n: fmtNum(e.lastPayout.qubic), eur: fmtNum(e.lastPayout.qubic * price, 2) });
-      $('est-gross').textContent = t('est_gross', { eur: fmtNum(e.grossDay, 2) });
-      $('est-elec').textContent = t('est_elec', { eur: fmtNum(e.elecDay, 2), w: e.watts, p: fmtNum(S.kwhPrice != null ? S.kwhPrice : 0.2, 2) });
-      $('est-net').textContent = t('est_net', { eur: fmtNum(e.netDay, 2) });
-    } catch (_) {}
-  }
 
   function renderSys() {
     const warns = [];
@@ -277,7 +260,6 @@
     showScreen(S.firstRun && !S.wallet ? 'onboard' : 'main');
     refreshBalance();
     setInterval(refreshBalance, 60000);
-    setInterval(renderEstimate, 10 * 60000);
 
     $('onboard-start').onclick = async () => {
       $('onboard-start').disabled = true;
@@ -290,8 +272,6 @@
     $('terms-ok').onclick = () => $('modal-terms').classList.add('hidden');
     $('t-fullscreen').onchange = (e) => setSettings({ pauseFullscreen: e.target.checked });
     $('t-telemetry').onchange = (e) => setSettings({ telemetry: e.target.checked });
-    $('i-kwh').onchange = async (e) => { await setSettings({ kwhPrice: parseFloat(e.target.value) }); renderEstimate(); };
-    $('i-watts').onchange = async (e) => { await setSettings({ watts: e.target.value === '' ? null : parseInt(e.target.value, 10) }); renderEstimate(); };
     $('b-ref-copy').onclick = () => { if (S.wallet) { window.mq.copy(S.wallet.id); toast(t('copied')); } };
     $('b-ref-save').onclick = async () => {
       const r = await window.mq.setReferral($('i-ref').value.trim());

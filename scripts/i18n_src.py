@@ -4,7 +4,7 @@ et vérifie que chaque langue a exactement les mêmes clés que le français."""
 import json, pathlib
 
 LANG_NAMES = {
-    'fr': 'Français', 'en': 'English', 'es': 'Español', 'pt': 'Português (BR)', 'de': 'Deutsch',
+    'en': 'English', 'fr': 'Français', 'es': 'Español', 'pt': 'Português (BR)', 'de': 'Deutsch',
     'it': 'Italiano', 'ru': 'Русский', 'zh': '简体中文', 'ja': '日本語', 'ko': '한국어', 'tr': 'Türkçe',
     'id': 'Bahasa Indonesia', 'vi': 'Tiếng Việt', 'ar': 'العربية', 'hi': 'हिन्दी',
 }
@@ -1444,8 +1444,9 @@ if __name__ == '__main__':
         for key, val in v.items():
             for ph in __import__('re').findall(r'\{(\w+)\}', T['fr'][key]):
                 assert '{' + ph + '}' in val, (k, key, 'placeholder', ph)
+    ordered = {k: T[k] for k in ['en'] + [l for l in T if l != 'en']}
     out = "// Généré par scripts/i18n_src.py — ne pas éditer à la main.\n(function (root) {\n"
-    out += "  const I18N = " + json.dumps(T, ensure_ascii=False, indent=1) + ";\n"
+    out += "  const I18N = " + json.dumps(ordered, ensure_ascii=False, indent=1) + ";\n"
     out += "  I18N.__names = " + json.dumps(LANG_NAMES, ensure_ascii=False) + ";\n"
     out += "  I18N.__rtl = " + json.dumps(RTL) + ";\n"
     out += "  if (typeof module !== 'undefined' && module.exports) module.exports = I18N; else root.I18N = I18N;\n})(typeof window !== 'undefined' ? window : globalThis);\n"

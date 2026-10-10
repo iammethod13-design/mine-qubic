@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const CFG = require('./config');
 
 const DEFAULTS = {
-  lang: null,                 // null = auto (fr si l'OS est en français, sinon en)
+  lang: 'en',                 // anglais par défaut (langue n°1) ; l'utilisateur peut changer dans l'app
   firstRun: true,
   wallet: null,               // { id, seedEnc|null, external }
   alias: null,                // nom du worker sur le pool
@@ -77,14 +77,7 @@ class Store {
     };
   }
 
-  static detectLang() {
-    let l = '';
-    try { l = require('electron').app.getLocale(); } catch (_) {}
-    l = (l || process.env.LANG || process.env.LC_ALL || Intl.DateTimeFormat().resolvedOptions().locale || '').toLowerCase();
-    const code = l.split(/[-_.]/)[0];
-    const known = ['fr', 'en', 'es', 'pt', 'de', 'it', 'ru', 'zh', 'ja', 'ko', 'tr', 'id', 'vi', 'ar', 'hi'];
-    return known.includes(code) ? code : 'en';
-  }
+  static detectLang() { return 'en'; }
 }
 
 module.exports = { Store, DEFAULTS, homeDir: os.homedir };

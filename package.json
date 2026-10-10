@@ -1,8 +1,8 @@
 {
   "name": "mine-qubic",
   "productName": "Mine Qubic",
-  "version": "0.2.3",
-  "description": "Un clic et ton PC mine du QUBIC sur le pool qubic.li (non-custodial).",
+  "version": "0.3.0",
+  "description": "One click and your PC mines QUBIC on the qubic.li pool (non-custodial).",
   "main": "src/main.js",
   "author": "Cointribune",
   "license": "MIT",

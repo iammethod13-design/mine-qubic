@@ -5,7 +5,7 @@ const CFG = require('./config');
 const cache = { price: { at: 0, value: null }, balance: new Map() };
 
 async function getJson(url, timeoutMs = 8000) {
-  const r = await fetch(url, { signal: AbortSignal.timeout(timeoutMs), headers: { 'User-Agent': 'MineQubic/0.1' } });
+  const r = await fetch(url, { signal: AbortSignal.timeout(timeoutMs), headers: { 'User-Agent': 'PassiveMining/0.4' } });
   if (!r.ok) throw new Error('http_' + r.status);
   return r.json();
 }

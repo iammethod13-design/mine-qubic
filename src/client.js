@@ -19,7 +19,7 @@ const PLATFORM = process.platform === 'win32' ? 'win32' : 'linux';
 function download(url, dest, onProgress, redirects = 0) {
   return new Promise((resolve, reject) => {
     if (redirects > 5) return reject(new Error('too_many_redirects'));
-    https.get(url, { headers: { 'User-Agent': 'MineQubic/0.1' } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': 'PassiveMining/0.4' } }, (res) => {
       if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location) {
         res.resume();
         const next = new URL(res.headers.location, url).toString();

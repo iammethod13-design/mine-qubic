@@ -1,9 +1,9 @@
-# Mine Qubic — « je clique et ça mine »
+# Passive Mining — « je clique et ça mine »
 
 Application Windows (Electron) qui fait miner du QUBIC à un PC ordinaire sur le pool **qubic.li**, sans compte, sans configuration. Non-custodial : chaque utilisateur a son propre wallet Qubic, créé dans l'app, et le pool le paie directement chaque semaine. Interface en **15 langues**, anglais par défaut (EN, FR, ES, PT-BR, DE, IT, RU, ZH, JA, KO, TR, ID, VI, AR, HI), marque Qubic officielle (brand kit).
 
 ```
-Utilisateur ──clic──▶ Mine Qubic ──lance──▶ qli-Client (officiel) ──▶ pool qubic.li ──paie──▶ wallet de l'utilisateur
+Utilisateur ──clic──▶ Passive Mining ──lance──▶ qli-Client (officiel) ──▶ pool qubic.li ──paie──▶ wallet de l'utilisateur
                                                                                     └──paie──▶ ton wallet (3 % du temps)
 ```
 
@@ -76,9 +76,9 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 | 4 | Faire relire CGU/confidentialité par un juriste, remplir l'entité et l'e-mail de contact | toi | `docs/cgu.md`, `docs/confidentialite.md` |
 | 5 | Test de rentabilité sur une epoch (optionnel : l'app affiche de toute façon l'estimation nette à chaque utilisateur) | — | `docs/test-rentabilite.md` |
 | 6 | Endpoint de télémétrie (optionnel : un simple webhook/Google Sheet) → `TELEMETRY_URL` | toi, 30 min | |
-| 7 | Relecture des 13 traductions non FR/EN par des natifs (le ton, pas le sens) | ton réseau Cointribune | `scripts/i18n_src.py` |
+| 7 | Relecture des 13 traductions non FR/EN par des natifs (le ton, pas le sens) | ton réseau | `scripts/i18n_src.py` |
 | 8 | Accord écrit de Qubic pour l'usage du logo dans une app tierce | toi | |
-| 9 | Mac : pas de mineur Qubic pour macOS (ni qubic.li, ni apool, ni rqiner) → demander un build à qubic.li. iPhone/iPad : impossible (App Store 2.4.2). Android : app officielle qubic.li (APK), même adresse → mêmes paiements ; une app Mine Qubic Android demanderait de réécrire l'app autour de leur client (gros chantier, gains minuscules sur téléphone). | — | |
+| 9 | Mac : pas de mineur Qubic pour macOS (ni qubic.li, ni apool, ni rqiner) → demander un build à qubic.li. iPhone/iPad : impossible (App Store 2.4.2). Android : app officielle qubic.li (APK), même adresse → mêmes paiements ; une app Passive Mining Android demanderait de réécrire l'app autour de leur client (gros chantier, gains minuscules sur téléphone). | — | |
 
 ## Validé sur ton PC (10 oct. 2026)
 
@@ -98,7 +98,7 @@ src/wallet.js        ← seed → ID Qubic, chiffrement safeStorage, import/expo
 src/chain.js         ← solde on-chain, prix, prochaine epoch
 src/sysinfo.js       ← RAM, NVIDIA, modèle CPU
 src/updater.js       ← electron-updater (mises à jour de l'app)
-src/store.js         ← settings.json (dans %APPDATA%\Mine Qubic)
+src/store.js         ← settings.json (dans %APPDATA%\Passive Mining)
 src/renderer/        ← UI (HTML/CSS/JS), i18n.js généré (15 langues)
 scripts/i18n_src.py  ← source des traductions ; scripts/make_icon.py ← icône depuis la marque Qubic
 test/run.js          ← 44 tests unitaires ; test/ui.js ← 21 tests UI (app réelle + mineur simulé)

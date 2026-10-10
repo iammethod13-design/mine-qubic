@@ -1,10 +1,10 @@
-# Conditions générales d'utilisation — Mine Qubic
+# Conditions générales d'utilisation — Passive Mining
 
 *Version 1.0, octobre 2026. Projet de texte à faire relire par un conseil juridique avant publication. Une version anglaise suit.*
 
 ## 1. Objet
 
-Mine Qubic (« l'Application ») est un logiciel gratuit édité par **[Cointribune / entité à préciser]** (« l'Éditeur ») qui permet à l'utilisateur de faire participer son ordinateur au réseau Qubic via le pool de minage qubic.li, exploité par un tiers indépendant de l'Éditeur.
+Passive Mining (« l'Application ») est un logiciel gratuit édité par **[entité à préciser]** (« l'Éditeur ») qui permet à l'utilisateur de faire participer son ordinateur au réseau Qubic via le pool de minage qubic.li, exploité par un tiers indépendant de l'Éditeur.
 
 ## 2. Fonctionnement et nature non-custodiale
 
@@ -51,11 +51,11 @@ L'Éditeur peut modifier l'Application et les présentes ; la version applicable
 
 ---
 
-# Terms of Use — Mine Qubic (English)
+# Terms of Use — Passive Mining (English)
 
 *Version 1.0, October 2026. Draft for legal review.*
 
-1. **Purpose.** Mine Qubic (the "App") is free software published by **[Cointribune / entity TBD]** (the "Publisher") that lets your computer contribute to the Qubic network through the qubic.li mining pool, operated by an independent third party.
+1. **Purpose.** Passive Mining (the "App") is free software published by **[entity TBD]** (the "Publisher") that lets your computer contribute to the Qubic network through the qubic.li mining pool, operated by an independent third party.
 2. **Non-custodial.** The App generates a secret seed and Qubic address locally on your computer. The seed is encrypted by your operating system and never sent to the Publisher. **The Publisher has no access to your funds and cannot recover them if you lose your seed.** The App downloads and runs the official qubic.li client (third-party open source software) after verifying its hash; that client downloads its own AI training programs. Pool rewards are paid by the pool directly to your address.
 3. **Publisher fee.** **[3]% of mining time** is mined for the Publisher's address, in short slices, during which the pool pays the Publisher. If you entered a referral code, part of that fee ([20]%) is mined for the referrer's address instead. The Publisher itself pays nobody.
 4. **No guaranteed earnings.** Rewards depend on the Qubic network, the pool, your hardware and the QUBIC price. Mining uses electricity and stresses hardware; check that your machine is suitable and that electricity does not cost more than you earn.

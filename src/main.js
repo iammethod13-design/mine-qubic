@@ -42,7 +42,7 @@ function createWindow() {
     minWidth: 400,
     minHeight: 640,
     backgroundColor: '#16171b',
-    title: 'Mine Qubic',
+    title: 'Passive Mining',
     icon: iconPath(),
     autoHideMenuBar: true,
     webPreferences: {
@@ -76,7 +76,7 @@ function refreshTray() {
   if (!tray) return;
   const running = scheduler && scheduler.wanted;
   tray.setContextMenu(Menu.buildFromTemplate([
-    { label: 'Mine Qubic', enabled: false },
+    { label: 'Passive Mining', enabled: false },
     { type: 'separator' },
     { label: running ? t('tray_stop') : t('tray_start'), click: () => (running ? scheduler.stop() : scheduler.start()) },
     { label: t('tray_open'), click: showWindow },
@@ -89,7 +89,7 @@ function createTray() {
   try {
     const img = nativeImage.createFromPath(iconPath('tray.png')).resize({ width: 16, height: 16 });
     tray = new Tray(img);
-    tray.setToolTip('Mine Qubic');
+    tray.setToolTip('Passive Mining');
     refreshTray();
     tray.on('click', showWindow);
     scheduler.on('state', refreshTray);
@@ -262,7 +262,22 @@ function setupIpc() {
   ipcMain.handle('app:quit', () => { quitting = true; app.quit(); });
 }
 
+/** L'app s'appelait « Mine Qubic » jusqu'en 0.3.x : on récupère les réglages (adresse, seed chiffrée DPAPI,
+ *  langue…) de l'ancien dossier %APPDATA%\Mine Qubic au premier lancement de « Passive Mining ». */
+function migrateOldUserData() {
+  try {
+    const fs = require('fs');
+    const dst = path.join(app.getPath('userData'), 'settings.json');
+    const src = path.join(app.getPath('appData'), 'Mine Qubic', 'settings.json');
+    if (!fs.existsSync(dst) && fs.existsSync(src)) {
+      fs.mkdirSync(path.dirname(dst), { recursive: true });
+      fs.copyFileSync(src, dst);
+    }
+  } catch (_) { /* on repart de zéro */ }
+}
+
 app.whenReady().then(async () => {
+  migrateOldUserData();
   store = new Store(app.getPath('userData'));
   client = MOCK ? new (require('../test/mock-client').MockClient)() : new MinerClient(app.getPath('userData'));
   fullscreen = new FullscreenWatcher();

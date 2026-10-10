@@ -1,0 +1,19 @@
+PackageIdentifier: PassiveMining.PassiveMining
+PackageVersion: 0.4.0
+PackageLocale: fr-FR
+Publisher: Passive Mining
+PublisherUrl: https://github.com/iammethod13-design/mine-qubic
+PublisherSupportUrl: https://github.com/iammethod13-design/mine-qubic/issues
+PackageName: Passive Mining
+PackageUrl: https://github.com/iammethod13-design/mine-qubic
+License: MIT
+LicenseUrl: https://github.com/iammethod13-design/mine-qubic/blob/main/LICENSE
+ShortDescription: Un clic et ton PC mine du QUBIC quand tu ne t'en sers pas (pool qubic.li, non-custodial).
+Description: Passive Mining lance le client de minage officiel qubic.li sur un PC ordinaire, uniquement quand il est inactif, et verse les récompenses chaque semaine sur le wallet Qubic de l'utilisateur. Gratuit, non-custodial, 15 langues.
+Tags:
+  - qubic
+  - mining
+  - crypto
+ReleaseNotesUrl: https://github.com/iammethod13-design/mine-qubic/releases/tag/v0.4.0
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

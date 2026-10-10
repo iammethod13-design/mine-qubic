@@ -4,11 +4,11 @@
 
 Free code signing provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org).
 
-**Project:** Mine Qubic — https://github.com/iammethod13-design/mine-qubic
+**Project:** Passive Mining — https://github.com/iammethod13-design/mine-qubic
 **License:** MIT
 
 **Team roles**
-- Authors: Pierre-Louis Ballerich (Cointribune)
+- Authors: Pierre-Louis Ballerich
 - Reviewers: Pierre-Louis Ballerich
 - Approvers: Pierre-Louis Ballerich
 

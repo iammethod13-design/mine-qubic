@@ -1,16 +1,16 @@
 # Texte prêt à coller : soumission « faux positif » aux antivirus
 
-Formulaire Microsoft : https://www.microsoft.com/wdsi/filesubmission → « Software developer » → joindre `MineQubic-<version>-win-x64.exe` (signé de préférence).
+Formulaire Microsoft : https://www.microsoft.com/wdsi/filesubmission → « Software developer » → joindre `PassiveMining-<version>-win-x64.exe` (signé de préférence).
 
 ---
 
-**Product name:** Mine Qubic
-**Publisher:** Cointribune
+**Product name:** Passive Mining
+**Publisher:** Passive Mining
 **Website:** https://github.com/iammethod13-design/mine-qubic
-**Detection to review:** PUA:Win32/CoinMiner (or similar) on MineQubic-x.y.z-win-x64.exe
+**Detection to review:** PUA:Win32/CoinMiner (or similar) on PassiveMining-x.y.z-win-x64.exe
 
 **Description:**
-Mine Qubic is a free, open-source (MIT) desktop application that lets a user voluntarily contribute their own computer's CPU to the Qubic network through the public qubic.li mining pool, in exchange for QUBIC rewards paid by the pool directly to the user's own wallet.
+Passive Mining is a free, open-source (MIT) desktop application that lets a user voluntarily contribute their own computer's CPU to the Qubic network through the public qubic.li mining pool, in exchange for QUBIC rewards paid by the pool directly to the user's own wallet.
 
 Key facts relevant to the PUA assessment:
 - Installed and started only by explicit user action (one-click installer, visible window, Start/Stop button). It never runs hidden, never installs silently with other software, and is never bundled.

@@ -10,7 +10,7 @@ Objectif : savoir, chiffres mesurés à l'appui, ce qu'un PC ordinaire gagne net
 
 ## Déroulé
 
-1. **Mercredi 14:00 UTC** (juste après le début de l'epoch) : noter le solde de chaque wallet (0 si nouveau), relever le wattmètre à 0 (ou noter le compteur), lancer Mine Qubic en **mode « toujours », puissance Max**, et laisser tourner 7 jours sans interruption. Noter le modèle de CPU, la version du mineur et la ligne `CPU: Enabled with AVX512/AVX2` du journal technique.
+1. **Mercredi 14:00 UTC** (juste après le début de l'epoch) : noter le solde de chaque wallet (0 si nouveau), relever le wattmètre à 0 (ou noter le compteur), lancer Passive Mining en **mode « toujours », puissance Max**, et laisser tourner 7 jours sans interruption. Noter le modèle de CPU, la version du mineur et la ligne `CPU: Enabled with AVX512/AVX2` du journal technique.
 2. **Chaque jour** : relever la vitesse affichée (it/s) et la température CPU (HWiNFO ou le BIOS). Si la machine throttle, noter l'heure.
 3. **Mercredi suivant, après 13:00 UTC** (le pool paie dans les 24 h après la fin de l'epoch, en pratique le mercredi midi-soir) : attendre la notification « Paiement reçu », noter le solde et les kWh consommés.
 4. Recommencer une 2e epoch en **mode inactif** sur une machine utilisée normalement, pour mesurer le gain réel d'un usage « bureau ».

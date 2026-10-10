@@ -14,6 +14,6 @@ Le dépôt local est déjà initialisé avec un premier commit. Il reste à le p
    ```
 4. Le tag déclenche `.github/workflows/release.yml` : tests, build Windows (installateur NSIS + portable) et Linux (AppImage), puis publication sur **Releases**. Dix minutes plus tard, le lien « Télécharger pour Windows » du site fonctionne, et les apps installées se mettront à jour toutes seules aux prochains tags.
 5. Signature (optionnel mais recommandé avant diffusion large) : voir `docs/signature-code.md`, puis ajouter les secrets dans Settings → Secrets and variables → Actions.
-6. Site : active GitHub Pages (Settings → Pages → branche `main`, dossier `/site`) ou héberge `site/index.html` sur cointribune.com.
+6. Site : active GitHub Pages (Settings → Pages → branche `main`, dossier `/site`) ou héberge `site/index.html` où tu veux.com.
 
 Pour chaque nouvelle version : `npm version minor` (ou patch), `git push && git push --tags`. Pour une nouvelle version du mineur qubic.li sans rebuild de l'app : `./scripts/update-manifest.sh 3.9.0` puis commit + push.

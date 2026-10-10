@@ -1,9 +1,9 @@
 // Configuration electron-builder. La signature Windows (Azure Trusted Signing) ne s'active
 // que si les variables AZURE_* sont présentes (secrets GitHub) : sans elles, build non signé.
 const build = {
-  "appId": "com.cointribune.minequbic",
-  "productName": "Mine Qubic",
-  "artifactName": "MineQubic-${version}-${os}-${arch}.${ext}",
+  "appId": "org.passivemining.app",
+  "productName": "Passive Mining",
+  "artifactName": "PassiveMining-${version}-${os}-${arch}.${ext}",
   "directories": {
     "output": "dist"
   },
@@ -37,10 +37,10 @@ const build = {
     "perMachine": false,
     "allowToChangeInstallationDirectory": false,
     "deleteAppDataOnUninstall": false,
-    "shortcutName": "Mine Qubic"
+    "shortcutName": "Passive Mining"
   },
   "portable": {
-    "artifactName": "MineQubic-${version}-portable.exe"
+    "artifactName": "PassiveMining-${version}-portable.exe"
   },
   "linux": {
     "target": [
@@ -48,7 +48,7 @@ const build = {
     ],
     "category": "Utility",
     "icon": "assets/icon.png",
-    "artifactName": "MineQubic-${version}-linux-${arch}.${ext}"
+    "artifactName": "PassiveMining-${version}-linux-${arch}.${ext}"
   },
   "publish": [
     {
@@ -61,7 +61,7 @@ const build = {
 
 if (process.env.AZURE_CLIENT_ID && process.env.AZURE_CODESIGNING_ACCOUNT && process.env.AZURE_CERT_PROFILE) {
   build.win.azureSignOptions = {
-    publisherName: process.env.AZURE_PUBLISHER_NAME || 'Cointribune',
+    publisherName: process.env.AZURE_PUBLISHER_NAME || 'Passive Mining',
     endpoint: process.env.AZURE_CODESIGNING_ENDPOINT || 'https://weu.codesigning.azure.net',
     codeSigningAccountName: process.env.AZURE_CODESIGNING_ACCOUNT,
     certificateProfileName: process.env.AZURE_CERT_PROFILE,

@@ -4,7 +4,7 @@
 
 Pour que l'app fonctionne : non. Pour qu'elle soit installée par des gens qui ne te connaissent pas : en pratique oui. Sans signature, Windows affiche l'écran bleu SmartScreen (« Windows a protégé votre ordinateur ») à **100 % des utilisateurs**, et Defender ou un antivirus tiers peut mettre l'exe en quarantaine. Les retours d'expérience des éditeurs de logiciels grand public convergent : sans signature, une bonne moitié des gens s'arrête là.
 
-Ce que je ne peux pas faire : obtenir le certificat. Il faut une identité vérifiée (pièce d'identité pour un particulier, Kbis pour Cointribune) et un paiement. Tout le reste est préparé : dès que tu as les identifiants, la signature est automatique à chaque release.
+Ce que je ne peux pas faire : obtenir le certificat. Il faut une identité vérifiée (pièce d'identité pour un particulier, Kbis pour une société) et un paiement. Tout le reste est préparé : dès que tu as les identifiants, la signature est automatique à chaque release.
 
 ## Le Microsoft Store n'est pas une option
 
@@ -12,7 +12,7 @@ Politique du Store, clause **10.2.6** : « Apps that enable the mining of crypto
 
 ## Option 1 (gratuite) : SignPath Foundation
 
-Signature gratuite pour les projets open source. Mine Qubic remplit les critères vérifiables : licence MIT, dépôt public, builds automatisés depuis le dépôt (GitHub Actions), fonctionnalité décrite sur la page de téléchargement, désinstallation fournie. Un point d'incertitude : leurs conditions excluent les « programmes potentiellement indésirables », catégorie où certains antivirus rangent les mineurs. La réponse dépendra de leur lecture. Ça coûte 10 minutes d'essayer.
+Signature gratuite pour les projets open source. Passive Mining remplit les critères vérifiables : licence MIT, dépôt public, builds automatisés depuis le dépôt (GitHub Actions), fonctionnalité décrite sur la page de téléchargement, désinstallation fournie. Un point d'incertitude : leurs conditions excluent les « programmes potentiellement indésirables », catégorie où certains antivirus rangent les mineurs. La réponse dépendra de leur lecture. Ça coûte 10 minutes d'essayer.
 
 Ce qu'ils demandent, déjà en place dans le dépôt :
 - une page « Code signing policy » (`docs/code-signing-policy.md`, et le paragraphe sur la landing page) ;
@@ -24,7 +24,7 @@ Ce qu'ils demandent, déjà en place dans le dépôt :
 
 ## Option 2 (≈ 10 $/mois) : Azure Trusted Signing
 
-Service de Microsoft, réputation SmartScreen immédiate (l'émetteur est Microsoft). Validation « Individual » (pièce d'identité) ou « Organization » (Cointribune). Prérequis : un abonnement Azure (carte bancaire).
+Service de Microsoft, réputation SmartScreen immédiate (l'émetteur est Microsoft). Validation « Individual » (pièce d'identité) ou « Organization » . Prérequis : un abonnement Azure (carte bancaire).
 
 1. Portail Azure → créer une ressource **Trusted Signing** (région *West Europe*), puis **Identity validation** (1 à 5 jours) et un **Certificate profile** de type *Public Trust*.
 2. Microsoft Entra → *App registration* (service principal) + un secret client ; sur la ressource Trusted Signing, rôle **Trusted Signing Certificate Profile Signer** pour ce service principal.
@@ -37,7 +37,7 @@ Service de Microsoft, réputation SmartScreen immédiate (l'émetteur est Micros
 | `AZURE_CLIENT_SECRET` | son secret |
 | `AZURE_CODESIGNING_ACCOUNT` | nom du compte Trusted Signing |
 | `AZURE_CERT_PROFILE` | nom du profil de certificat |
-| `AZURE_PUBLISHER_NAME` | le CN exact du certificat (ex. `Cointribune`) |
+| `AZURE_PUBLISHER_NAME` | le CN exact du certificat (ex. `Passive Mining`) |
 | `AZURE_CODESIGNING_ENDPOINT` | `https://weu.codesigning.azure.net` |
 
 4. C'est tout : `electron-builder.config.js` active la signature quand ces secrets existent, et le prochain build GitHub produit un installateur signé. Rien à changer dans le code.
@@ -59,6 +59,6 @@ Même signé, un mineur peut être classé *PUA* (programme potentiellement ind�
 
 ## En attendant la signature
 
-- `winget install Cointribune.MineQubic` : les manifests sont prêts dans `winget/`. Une fois le PR accepté sur microsoft/winget-pkgs, cette commande installe sans passer par SmartScreen. Soumission : fork de https://github.com/microsoft/winget-pkgs, copier les 3 fichiers dans `manifests/c/Cointribune/MineQubic/0.2.3/`, ouvrir un pull request (validation automatique, 1 à 3 jours).
+- `winget install PassiveMining.PassiveMining` : les manifests sont prêts dans `winget/`. Une fois le PR accepté sur microsoft/winget-pkgs, cette commande installe sans passer par SmartScreen. Soumission : fork de https://github.com/microsoft/winget-pkgs, copier les 3 fichiers dans `manifests/p/PassiveMining/PassiveMining/0.2.3/`, ouvrir un pull request (validation automatique, 1 à 3 jours).
 - La FAQ de la landing page explique en deux clics comment passer l'écran SmartScreen.
 - Le mineur qubic.li n'est pas dans l'installateur (téléchargé à la demande, hash vérifié) : l'installateur lui-même a peu de raisons d'être flaggé.

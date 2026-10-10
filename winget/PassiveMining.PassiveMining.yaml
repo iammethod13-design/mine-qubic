@@ -1,0 +1,8 @@
+# Manifest winget (Windows Package Manager). Soumission : fork de microsoft/winget-pkgs,
+# dossier manifests/p/PassiveMining/PassiveMining/0.4.0/, les 3 fichiers, puis pull request.
+# Une fois accepté : `winget install PassiveMining.PassiveMining` installe l'app sans passer par SmartScreen.
+PackageIdentifier: PassiveMining.PassiveMining
+PackageVersion: 0.4.0
+DefaultLocale: fr-FR
+ManifestType: version
+ManifestVersion: 1.6.0

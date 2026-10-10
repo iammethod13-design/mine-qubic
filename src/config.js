@@ -82,7 +82,7 @@ module.exports = {
   ],
 
   // Préfixe du nom de worker visible sur pool.qubic.li
-  ALIAS_PREFIX: 'MQ',
+  ALIAS_PREFIX: 'PM',
 
   // Mode "seulement quand le PC est inactif" : délai avant de démarrer (minutes)
   IDLE_MINUTES_DEFAULT: 3,

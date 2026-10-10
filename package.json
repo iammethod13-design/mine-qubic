@@ -80,7 +80,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "CHANGE_ME",
+        "owner": "iammethod13-design",
         "repo": "mine-qubic"
       }
     ]

@@ -54,12 +54,12 @@ module.exports = {
 
   // Mise à jour automatique de l'app elle-même via electron-updater + GitHub Releases.
   // Remplis owner/repo (dépôt public avec les releases) pour l'activer.
-  APP_UPDATE: { provider: 'github', owner: '', repo: '' },
+  APP_UPDATE: { provider: 'github', owner: 'iammethod13-design', repo: 'mine-qubic' },
 
   // Optionnel : URL d'un manifest JSON {version, win32:{url,sha256}, linux:{...}}
   // hébergé par toi, pour pousser une mise à jour du client sans rebuilder l'app.
   // Laisse vide pour utiliser uniquement CLIENT ci-dessus.
-  REMOTE_MANIFEST_URL: '',
+  REMOTE_MANIFEST_URL: 'https://raw.githubusercontent.com/iammethod13-design/mine-qubic/main/manifest.json',
 
   // Pool
   POOL_WS: 'wss://wps.qubic.li/ws',

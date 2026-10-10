@@ -47,42 +47,38 @@ Trois mécanismes, du plus automatique au plus manuel :
 
 ```
 npm install
-npm test                  # 33 tests
+npm run test:all          # 41 tests unitaires + 17 tests UI (Linux : xvfb-run -a npm run test:ui)
 npm run build:win         # Windows : installateur NSIS un clic + portable (dist/)
+npm run build:linux       # AppImage
 ```
 Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) ; l'installateur demande Wine. Les traductions se régénèrent avec `python3 scripts/i18n_src.py`, l'icône avec `python3 scripts/make_icon.py`.
 
-## État : ce qui est fait, ce qui manque
+## État (v0.2.0)
 
-### Fait (dans ce dépôt)
-- Onboarding 1 clic, wallet local chiffré, téléchargement vérifié du client, lancement/arrêt propre (arbre de processus), redémarrage auto en cas de plantage.
-- Mode inactif, 3 niveaux de puissance, GPU optionnel avec détection NVIDIA, démarrage avec Windows, tray.
-- Dev fee 3 % par tranches, persistant et affiché.
-- Gains on-chain + € + notification de paiement.
-- Mises à jour : client (AutoUpdate + manifest + rejet du pool) et app (electron-updater).
+### Fait
+- Onboarding 1 clic, wallet local chiffré, téléchargement vérifié du client, lancement/arrêt propre, redémarrage auto.
+- Mode inactif, 3 niveaux de puissance, GPU optionnel (détection NVIDIA), **pause automatique quand un jeu ou une vidéo est en plein écran** (Windows), démarrage avec Windows, tray traduit.
+- Dev fee 3 % par tranches, persistant et affiché. **Parrainage non-custodial** : le code de parrainage est l'adresse Qubic ; 20 % des frais (1 min sur 5) sont minés pour le parrain, payés par le pool. Aucun backend.
+- Gains on-chain + € + notification de paiement + **estimation €/jour nette** (dernier(s) paiement(s) du pool ÷ 7 − électricité, avec prix du kWh et watts réglables).
+- Mises à jour : client (AutoUpdate + manifest distant + rejet du pool) et app (electron-updater + GitHub Releases, workflow fourni).
 - Connexion wallet : QR, wallet.qubic.org, export seed, import adresse/seed.
-- 15 langues, RTL pour l'arabe, détection de la langue de Windows.
-- Vérifications système : version CPU (AVX512/AVX2/GENERIC via le client), RAM < 8 Go, carte NVIDIA.
-- Logo et couleurs du brand kit Qubic.
+- 15 langues, RTL, détection de la langue de Windows. CGU + confidentialité affichées au premier lancement et dans l'app.
+- Télémétrie **opt-in** anonyme (désactivée par défaut, URL à renseigner).
+- Accessibilité : focus visible, aria, Échap ferme les fenêtres, réduction des animations. **41 tests unitaires + 17 tests UI** (`npm run test:all`).
+- Logo et couleurs du brand kit Qubic. Landing page FR/EN (`site/`). Docs : CGU, confidentialité, protocole de test de rentabilité, guide de signature.
 
-### À faire pour une sortie publique
-| # | Quoi | Effort | Pourquoi |
+### Reste à faire (et par qui)
+| # | Quoi | Qui | Doc |
 |---|---|---|---|
-| 1 | **Tester sur ton PC l'authentification registerless au pool** (voir ci-dessous) | 10 min | Bloquant : si qubic.li n'accepte plus l'adresse seule, il faut un mode token. |
-| 2 | **Vérifier le format des lignes de hashrate** du client et ajuster la regex (`src/client.js`, `_onLine`) | 30 min | La vitesse affichée en dépend. |
-| 3 | **Certificat de signature de code** (OV ~300 €/an, EV ~500 €/an) + soumission Microsoft Defender | 1-2 jours de délais | Sans ça : SmartScreen bleu, antivirus qui bloquent, taux d'installation divisé par 3. |
-| 4 | **Dépôt GitHub public + premier release** (active les mises à jour auto) | 1 h | |
-| 5 | **Manifest distant** hébergé (`manifest.json` sur ton site) | 30 min | Pour pousser une version du client sans rebuild. |
-| 6 | **Pause jeu plein écran** en mode « toujours » (détection de la fenêtre au premier plan via PowerShell/WinAPI) | 1 jour | Les gamers l'attendent. |
-| 7 | **Estimation €/jour nette** (hashrate × part du pool × prix − kWh) | 1 jour | Demande d'accéder aux stats du pool par adresse (API qubic.li à négocier) ou d'estimer à partir du solde. |
-| 8 | **Test de rentabilité réel** : une epoch complète sur 2-3 machines avec wattmètre | 1 semaine | Décide du positionnement (hiver / pays à électricité bon marché). |
-| 9 | **CGU + politique de confidentialité + mention des runners téléchargés par le client** | 2 h + relecture juridique | |
-| 10 | **Site de téléchargement** (landing + FAQ + page « pourquoi Windows affiche un avertissement ») | 1 jour | |
-| 11 | **Télémétrie opt-in** (nombre d'installs, version, langue) | ½ jour | Pour piloter l'adoption. |
-| 12 | **Parrainage** (code dans l'alias du worker, bonus) | 1-2 jours | Levier de croissance. |
-| 13 | Linux (packaging seulement) et macOS (pas de client qubic.li macOS : à attendre) | ½ jour / — | |
-| 14 | Relecture des 13 traductions non FR/EN par des natifs | 1 jour | Les textes sont corrects mais le ton mérite une relecture. |
-| 15 | Accessibilité clavier/lecteur d'écran, et tests automatisés de l'UI | 1 jour | |
+| 1 | Lancer `test-pool.bat` sur ton PC et me donner `pooltest.log` (authentification au pool + format des lignes de hashrate) | toi, 2 min | ci-dessous |
+| 2 | Créer le dépôt GitHub, remplir `owner`, pousser, taguer `v0.2.0` | toi, 5 min | `docs/publier-sur-github.md` |
+| 3 | Certificat de signature (Azure Trusted Signing ~10 $/mois) + soumission Defender | toi, 1-5 jours de délai | `docs/signature-code.md` |
+| 4 | Faire relire CGU/confidentialité par un juriste, remplir l'entité et l'e-mail de contact | toi | `docs/cgu.md`, `docs/confidentialite.md` |
+| 5 | Test de rentabilité sur une epoch (wattmètre) | toi, 1 semaine | `docs/test-rentabilite.md` |
+| 6 | Endpoint de télémétrie (optionnel : un simple webhook/Google Sheet) → `TELEMETRY_URL` | toi, 30 min | |
+| 7 | Relecture des 13 traductions non FR/EN par des natifs (le ton, pas le sens) | ton réseau Cointribune | `scripts/i18n_src.py` |
+| 8 | Accord écrit de Qubic pour l'usage du logo dans une app tierce | toi | |
+| 9 | macOS : pas de client qubic.li macOS, à attendre | — | |
 
 ## À vérifier en premier sur ton PC
 
@@ -104,7 +100,10 @@ src/updater.js       ← electron-updater (mises à jour de l'app)
 src/store.js         ← settings.json (dans %APPDATA%\Mine Qubic)
 src/renderer/        ← UI (HTML/CSS/JS), i18n.js généré (15 langues)
 scripts/i18n_src.py  ← source des traductions ; scripts/make_icon.py ← icône depuis la marque Qubic
-test/run.js          ← 33 tests
+test/run.js          ← 41 tests unitaires ; test/ui.js ← 17 tests UI (app réelle + mineur simulé)
+src/fullscreen.js    ← détection plein écran (PowerShell/WinAPI) ; src/telemetry.js ← stats opt-in
+site/index.html      ← landing page FR/EN ; docs/ ← CGU, confidentialité, signature, rentabilité, GitHub
+.github/workflows/   ← release.yml : tests + build Windows/Linux + publication
 ```
 
 ## Notes légales (à faire valider)

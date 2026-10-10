@@ -1,0 +1,14 @@
+PackageIdentifier: Cointribune.MineQubic
+PackageVersion: 0.2.3
+InstallerType: nullsoft
+Scope: user
+InstallModes:
+  - silent
+  - silentWithProgress
+UpgradeBehavior: install
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/iammethod13-design/mine-qubic/releases/download/v0.2.3/MineQubic-0.2.3-win-x64.exe
+    InstallerSha256: EC143B06F54B2DBA04B43F83A24907323A088C9EFDA65585E922C8E8BF678A13
+ManifestType: installer
+ManifestVersion: 1.6.0

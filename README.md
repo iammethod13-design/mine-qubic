@@ -45,6 +45,8 @@ Trois mécanismes, du plus automatique au plus manuel :
 
 ## Builder
 
+Dépôt : https://github.com/iammethod13-design/mine-qubic — release publiée : v0.2.3 (installateur, portable, AppImage). Le workflow GitHub Actions se lance à chaque tag `v*` (ou manuellement) et publie un brouillon de release à valider en un clic.
+
 ```
 npm install
 npm run test:all          # 41 tests unitaires + 17 tests UI (Linux : xvfb-run -a npm run test:ui)
@@ -70,10 +72,9 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 ### Reste à faire (et par qui)
 | # | Quoi | Qui | Doc |
 |---|---|---|---|
-| 2 | Créer le dépôt GitHub, remplir `owner`, pousser, taguer `v0.2.0` | toi, 5 min | `docs/publier-sur-github.md` |
-| 3 | Certificat de signature (Azure Trusted Signing ~10 $/mois) + soumission Defender | toi, 1-5 jours de délai | `docs/signature-code.md` |
+| 3 | Signature de code : d'abord SignPath Foundation (gratuit, formulaire 10 min), sinon Azure Trusted Signing (~10 $/mois, 7 secrets à coller) ; puis soumission Defender (texte prêt). Store Microsoft impossible (clause 10.2.6). winget préparé. | toi : formulaire + identité | `docs/signature-code.md`, `docs/defender-submission.md`, `winget/` |
 | 4 | Faire relire CGU/confidentialité par un juriste, remplir l'entité et l'e-mail de contact | toi | `docs/cgu.md`, `docs/confidentialite.md` |
-| 5 | Test de rentabilité sur une epoch (wattmètre) | toi, 1 semaine | `docs/test-rentabilite.md` |
+| 5 | Test de rentabilité sur une epoch (optionnel : l'app affiche de toute façon l'estimation nette à chaque utilisateur) | — | `docs/test-rentabilite.md` |
 | 6 | Endpoint de télémétrie (optionnel : un simple webhook/Google Sheet) → `TELEMETRY_URL` | toi, 30 min | |
 | 7 | Relecture des 13 traductions non FR/EN par des natifs (le ton, pas le sens) | ton réseau Cointribune | `scripts/i18n_src.py` |
 | 8 | Accord écrit de Qubic pour l'usage du logo dans une app tierce | toi | |

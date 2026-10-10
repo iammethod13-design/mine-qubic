@@ -1,0 +1,8 @@
+# Manifest winget (Windows Package Manager). Soumission : fork de microsoft/winget-pkgs,
+# dossier manifests/c/Cointribune/MineQubic/0.2.3/, les 3 fichiers, puis pull request.
+# Une fois accepté : `winget install Cointribune.MineQubic` installe l'app sans passer par SmartScreen.
+PackageIdentifier: Cointribune.MineQubic
+PackageVersion: 0.2.3
+DefaultLocale: fr-FR
+ManifestType: version
+ManifestVersion: 1.6.0

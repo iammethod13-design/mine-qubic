@@ -1,8 +1,8 @@
 # Build + release automatiques.
 #  - push d'un tag v* (ex. v0.2.0) → build Windows (installateur NSIS un clic + portable) et Linux (AppImage),
 #    puis publication sur GitHub Releases. electron-updater lit ces releases pour les mises à jour auto.
-#  - Signature Windows : ajoute les secrets WIN_CSC_LINK (certificat .pfx en base64) et WIN_CSC_KEY_PASSWORD,
-#    ou AZURE_* pour Azure Trusted Signing (voir docs/signature-code.md). Sans secrets, l'exe n'est pas signé.
+#  - Signature Windows : ajoute les secrets AZURE_* (Azure Trusted Signing, voir docs/signature-code.md).
+#    Sans secrets, l'exe n'est pas signé.
 name: release
 on:
   push:
@@ -28,12 +28,18 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Build + publish (NSIS + portable)
-        run: npx electron-builder --win --x64 --publish always
+      - name: Build + publish (NSIS + portable), signé si les secrets Azure existent
+        run: npx electron-builder --win --x64 --publish always --config electron-builder.config.js
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+          # Azure Trusted Signing (docs/signature-code.md) — laisser vide = non signé
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_CODESIGNING_ACCOUNT: ${{ secrets.AZURE_CODESIGNING_ACCOUNT }}
+          AZURE_CERT_PROFILE: ${{ secrets.AZURE_CERT_PROFILE }}
+          AZURE_PUBLISHER_NAME: ${{ secrets.AZURE_PUBLISHER_NAME }}
+          AZURE_CODESIGNING_ENDPOINT: ${{ secrets.AZURE_CODESIGNING_ENDPOINT }}
       - uses: actions/upload-artifact@v4
         with: { name: windows, path: "dist/*.exe" }
   linux:
@@ -44,6 +50,6 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - run: npx electron-builder --linux AppImage --x64 --publish always
+      - run: npx electron-builder --linux AppImage --x64 --publish always --config electron-builder.config.js
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

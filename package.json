@@ -10,8 +10,8 @@
   "scripts": {
     "start": "electron .",
     "test": "node test/run.js",
-    "build:win": "electron-builder --win",
-    "build:linux": "electron-builder --linux AppImage",
+    "build:win": "electron-builder --win --config electron-builder.config.js",
+    "build:linux": "electron-builder --linux AppImage --config electron-builder.config.js",
     "icon": "python3 scripts/make_icon.py",
     "test:ui": "node test/ui.js",
     "test:all": "npm test && npm run test:ui"
@@ -25,64 +25,6 @@
   },
   "devDependencies": {
     "electron": "^33.0.0",
-    "electron-builder": "^25.1.8"
-  },
-  "build": {
-    "appId": "com.cointribune.minequbic",
-    "productName": "Mine Qubic",
-    "artifactName": "MineQubic-${version}-${os}-${arch}.${ext}",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "src/**/*",
-      "assets/**/*",
-      "test/mock-client.js",
-      "package.json"
-    ],
-    "asar": true,
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "icon": "assets/icon.png",
-      "signAndEditExecutable": false
-    },
-    "nsis": {
-      "oneClick": true,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": false,
-      "deleteAppDataOnUninstall": false,
-      "shortcutName": "Mine Qubic"
-    },
-    "portable": {
-      "artifactName": "MineQubic-${version}-portable.exe"
-    },
-    "linux": {
-      "target": [
-        "AppImage"
-      ],
-      "category": "Utility",
-      "icon": "assets/icon.png",
-      "artifactName": "MineQubic-${version}-linux-${arch}.${ext}"
-    },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "iammethod13-design",
-        "repo": "mine-qubic"
-      }
-    ]
+    "electron-builder": "^26.15.3"
   }
 }

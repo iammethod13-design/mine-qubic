@@ -227,7 +227,7 @@ class Scheduler extends EventEmitter {
           await this._stopForSwitch();
           return; // le prochain tick relance avec l'adresse opérateur
         }
-        if (this.slice === 'operator' && now - this.sliceStartedAt >= fee.operator) {
+        if (this.slice === 'operator' && now - this.sliceStartedAt >= fee.operator * 1000) {
           if (fee.referrer > 0) {
             this.slice = 'referrer';
             this.sliceStartedAt = now;
@@ -240,7 +240,7 @@ class Scheduler extends EventEmitter {
           await this._stopForSwitch();
           return;
         }
-        if (this.slice === 'referrer' && now - this.sliceStartedAt >= fee.referrer) {
+        if (this.slice === 'referrer' && now - this.sliceStartedAt >= fee.referrer * 1000) {
           this.slice = 'user';
           this.store.set({ devFeeUserSeconds: 0 });
           this.emit('log', '[app] retour au minage utilisateur');

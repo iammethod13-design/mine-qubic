@@ -99,6 +99,8 @@ const ok = (name) => { passed++; console.log('  ✓', name); };
     assert.strictEqual(sch.slice, 'operator');
     await sch._tick(); // relance avec l'adresse opérateur
     assert.strictEqual(fc.starts[fc.starts.length - 1].address, CFG.OPERATOR_ADDRESS); ok('dev fee : bascule sur l\'adresse opérateur après le cycle');
+    sch.sliceStartedAt = Date.now() - 20000; await sch._tick();
+    assert.strictEqual(sch.slice, 'operator'); assert.strictEqual(fc.running, true); ok('dev fee : la tranche opérateur dure bien plus que 20 s (ms vs s)');
     sch.sliceStartedAt = Date.now() - CFG.DEV_FEE_SLICE_MINUTES * 60000 - 1;
     await sch._tick(); await sch._tick();
     assert.strictEqual(sch.slice, 'user'); assert.strictEqual(fc.starts[fc.starts.length - 1].address, w.id); assert.strictEqual(st.get('devFeeUserSeconds'), 0); ok('dev fee : revient à l\'utilisateur après la tranche, compteur remis à zéro');

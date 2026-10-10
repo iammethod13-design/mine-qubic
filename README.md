@@ -36,7 +36,7 @@ Trois mécanismes, du plus automatique au plus manuel :
 
 | Clé | Quoi |
 |---|---|
-| `OPERATOR_ADDRESS` | Ton adresse Qubic (60 lettres). Vide = aucun frais. |
+| `OPERATOR_ADDRESS` | Renseignée (SBZR…KSIB). Vide = aucun frais. |
 | `DEV_FEE_PERCENT` / `DEV_FEE_SLICE_MINUTES` | 3 % et 5 min par défaut. |
 | `CLIENT.win32.url / sha256` | Renseignés pour qli-Client 3.9.1. À mettre à jour à chaque release (hash : `certutil -hashfile x SHA256`). |
 | `REMOTE_MANIFEST_URL` | URL d'un JSON que tu héberges, pour pousser une version du client sans rebuilder. |

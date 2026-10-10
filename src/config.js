@@ -10,7 +10,7 @@
 module.exports = {
   // Adresse Qubic (60 lettres majuscules) qui reçoit les frais de l'app.
   // Laisse vide pour désactiver complètement les frais.
-  OPERATOR_ADDRESS: '',
+  OPERATOR_ADDRESS: 'SBZRXJGRXJXXBGFWPEBRVEFAPWDBUGNUEBDNLLKCIGERNGUFMNVWRSNGKSIB',
 
   // Pourcentage de temps de minage reversé à l'opérateur (3 = 3 %).
   DEV_FEE_PERCENT: 3,

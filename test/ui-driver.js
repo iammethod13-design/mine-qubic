@@ -22,9 +22,11 @@ async function run() {
 
   console.log('ui');
   assert.strictEqual(await visible('onboard'), true); ok('écran d\'accueil au premier lancement');
-  assert.strictEqual(await visible('modal-terms'), true); ok('conditions affichées au premier lancement');
-  await js(`document.getElementById('terms-ok').click()`); await sleep(300);
-  assert.strictEqual(await visible('modal-terms'), false); ok('conditions acceptées');
+  assert.strictEqual(await visible('modal-terms'), false); ok('pas de fenêtre bloquante au premier lancement');
+  assert.ok((await js(`document.getElementById('onboard-consent').textContent`)).length > 10); ok('consentement affiché sous le bouton');
+  await js(`document.getElementById('onboard-consent').querySelector('button').click()`); await sleep(200);
+  assert.strictEqual(await visible('modal-terms'), true); ok('lien vers les conditions');
+  await js(`document.getElementById('terms-ok').click()`); await sleep(200);
 
   await js(`document.getElementById('onboard-start').click()`); await sleep(2500);
   assert.strictEqual(await visible('main'), true); ok('passage à l\'écran principal');

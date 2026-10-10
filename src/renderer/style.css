@@ -130,3 +130,7 @@ input[type=number]:focus-visible, input[type=text]:focus-visible, select:focus-v
 .card-title, summary { outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) { .bigbtn .ring circle { animation: none !important; } .bigbtn, .cta { transition: none; } }
 @media (max-width: 380px) { .row.two { grid-template-columns: 1fr; } .grid { grid-template-columns: repeat(2, 1fr); } }
+
+.consent { color: var(--muted); font-size: 12px; margin: 12px 0 4px; }
+.consent button { background: none; border: 0; color: var(--muted); text-decoration: underline; padding: 0; font-size: inherit; cursor: pointer; }
+.toggle.center { justify-content: center; margin: 10px 0 2px; font-size: 13px; color: var(--muted); }

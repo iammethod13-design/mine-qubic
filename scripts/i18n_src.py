@@ -1422,6 +1422,14 @@ NEW['hi'] = {
 for _l, _d in NEW.items():
     T[_l].update(_d)
 
+
+# ---- v0.2.1 : consentement par le clic ----
+CONSENT = {'fr': 'En cliquant sur Démarrer, tu acceptes les {terms}.', 'en': 'By clicking Start, you accept the {terms}.', 'es': 'Al pulsar Empezar aceptas las {terms}.', 'pt': 'Ao clicar em Começar, você aceita os {terms}.', 'de': 'Mit Klick auf Starten akzeptierst du die {terms}.', 'it': 'Cliccando su Avvia accetti le {terms}.', 'ru': 'Нажимая «Начать», ты принимаешь {terms}.', 'zh': '点击“开始”即表示你接受{terms}。', 'ja': '「開始」を押すと{terms}に同意したことになります。', 'ko': '시작을 누르면 {terms}에 동의하는 것입니다.', 'tr': "Başlat'a tıklayarak {terms} kabul etmiş olursun.", 'id': 'Dengan mengklik Mulai, kamu menyetujui {terms}.', 'vi': 'Khi nhấn Bắt đầu, bạn chấp nhận {terms}.', 'ar': 'بالنقر على «ابدأ» فإنك توافق على {terms}.', 'hi': 'शुरू करें पर क्लिक करके आप {terms} स्वीकार करते हैं।'}
+TERMS_WORD = {'fr': "conditions d'utilisation", 'en': 'terms of use', 'es': 'condiciones de uso', 'pt': 'termos de uso', 'de': 'Nutzungsbedingungen', 'it': "condizioni d'uso", 'ru': 'условия использования', 'zh': '使用条款', 'ja': '利用規約', 'ko': '이용 약관', 'tr': 'kullanım koşullarını', 'id': 'ketentuan penggunaan', 'vi': 'điều khoản sử dụng', 'ar': 'شروط الاستخدام', 'hi': 'उपयोग की शर्तें'}
+for _l in CONSENT:
+    T[_l]['onboard_consent'] = CONSENT[_l]
+    T[_l]['terms_word'] = TERMS_WORD[_l]
+
 if __name__ == '__main__':
     ref = set(T['fr'])
     for k, v in T.items():

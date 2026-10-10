@@ -26,6 +26,9 @@
       ? t('fee_line', { pct: C.devFeePercent, v: C.clientVersion })
       : t('fee_line_nofee', { v: C.clientVersion });
     $('terms-text').textContent = t('terms_text', { pct: C.devFeePercent || 0 });
+    { const el = $('onboard-consent'); el.textContent = ''; const parts = t('onboard_consent', { terms: '\u0000' }).split('\u0000');
+      el.append(parts[0]); const b = document.createElement('button'); b.type = 'button'; b.textContent = t('terms_word'); b.onclick = () => $('modal-terms').classList.remove('hidden'); el.append(b); el.append(parts[1] || ''); }
+    $('onboard-login-row').style.display = C.platform === 'linux' ? 'none' : '';
     $('ref-hint').textContent = t('referral_hint', { pct: Math.round((C.referralShare || 0) * 100) });
     renderSettings();
     renderStatus();
@@ -272,21 +275,19 @@
     fillLangSelects();
     applyI18n();
     showScreen(S.firstRun && !S.wallet ? 'onboard' : 'main');
-    if (!S.termsAccepted) $('modal-terms').classList.remove('hidden');
     refreshBalance();
     setInterval(refreshBalance, 60000);
     setInterval(renderEstimate, 10 * 60000);
 
     $('onboard-start').onclick = async () => {
       $('onboard-start').disabled = true;
-      await setSettings({ firstRun: false });
+      await setSettings({ firstRun: false, termsAccepted: true, autoStart: true, launchAtLogin: C.platform !== 'linux' && $('onboard-login').checked });
       showScreen('main');
       await toggle();
     };
-    $('onboard-have').onclick = async () => { await setSettings({ firstRun: false }); showScreen('main'); openChange(); };
-    $('onboard-terms').onclick = () => $('modal-terms').classList.remove('hidden');
+    $('onboard-have').onclick = async () => { await setSettings({ firstRun: false, termsAccepted: true }); showScreen('main'); openChange(); };
     $('b-terms').onclick = () => $('modal-terms').classList.remove('hidden');
-    $('terms-ok').onclick = async () => { $('modal-terms').classList.add('hidden'); if (!S.termsAccepted) await setSettings({ termsAccepted: true }); };
+    $('terms-ok').onclick = () => $('modal-terms').classList.add('hidden');
     $('t-fullscreen').onchange = (e) => setSettings({ pauseFullscreen: e.target.checked });
     $('t-telemetry').onchange = (e) => setSettings({ telemetry: e.target.checked });
     $('i-kwh').onchange = async (e) => { await setSettings({ kwhPrice: parseFloat(e.target.value) }); renderEstimate(); };
@@ -300,7 +301,7 @@
     $('b-ref-remove').onclick = async () => { await window.mq.setReferral(''); S.referrer = null; renderReferral(); };
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
-      document.querySelectorAll('.modal:not(.hidden)').forEach((m) => { if (m.id !== 'modal-terms' || S.termsAccepted) m.classList.add('hidden'); });
+      document.querySelectorAll('.modal:not(.hidden)').forEach((m) => m.classList.add('hidden'));
     });
     $('bigbtn').onclick = toggle;
 

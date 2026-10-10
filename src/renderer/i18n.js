@@ -125,7 +125,9 @@
   "privacy_text": "Données traitées : adresse Qubic publique (envoyée au pool pour te payer), réglages locaux. Aucun compte, aucun e-mail, aucune donnée vendue. Statistiques anonymes seulement si tu les actives.",
   "a11y_bigbtn_start": "Démarrer le minage",
   "a11y_bigbtn_stop": "Arrêter le minage",
-  "a11y_close": "Fermer la fenêtre"
+  "a11y_close": "Fermer la fenêtre",
+  "onboard_consent": "En cliquant sur Démarrer, tu acceptes les {terms}.",
+  "terms_word": "conditions d'utilisation"
  },
  "en": {
   "onboard_title": "Your PC mines QUBIC.",
@@ -251,7 +253,9 @@
   "privacy_text": "Data processed: your public Qubic address (sent to the pool to pay you), local settings. No account, no email, no data sold. Anonymous statistics only if you turn them on.",
   "a11y_bigbtn_start": "Start mining",
   "a11y_bigbtn_stop": "Stop mining",
-  "a11y_close": "Close window"
+  "a11y_close": "Close window",
+  "onboard_consent": "By clicking Start, you accept the {terms}.",
+  "terms_word": "terms of use"
  },
  "es": {
   "onboard_title": "Tu PC mina QUBIC.",
@@ -377,7 +381,9 @@
   "privacy_text": "Datos tratados: tu dirección Qubic pública (enviada al pool para pagarte) y ajustes locales. Sin cuenta, sin correo, sin venta de datos. Estadísticas anónimas solo si las activas.",
   "a11y_bigbtn_start": "Empezar a minar",
   "a11y_bigbtn_stop": "Detener el minado",
-  "a11y_close": "Cerrar la ventana"
+  "a11y_close": "Cerrar la ventana",
+  "onboard_consent": "Al pulsar Empezar aceptas las {terms}.",
+  "terms_word": "condiciones de uso"
  },
  "pt": {
   "onboard_title": "Seu PC minera QUBIC.",
@@ -503,7 +509,9 @@
   "privacy_text": "Dados tratados: seu endereço Qubic público (enviado ao pool para te pagar) e configurações locais. Sem conta, sem e-mail, sem venda de dados. Estatísticas anônimas só se você ativar.",
   "a11y_bigbtn_start": "Começar a minerar",
   "a11y_bigbtn_stop": "Parar de minerar",
-  "a11y_close": "Fechar a janela"
+  "a11y_close": "Fechar a janela",
+  "onboard_consent": "Ao clicar em Começar, você aceita os {terms}.",
+  "terms_word": "termos de uso"
  },
  "de": {
   "onboard_title": "Dein PC schürft QUBIC.",
@@ -629,7 +637,9 @@
   "privacy_text": "Verarbeitete Daten: deine öffentliche Qubic-Adresse (an den Pool gesendet, um dich zu bezahlen), lokale Einstellungen. Kein Konto, keine E-Mail, kein Datenverkauf. Anonyme Statistiken nur, wenn du sie einschaltest.",
   "a11y_bigbtn_start": "Mining starten",
   "a11y_bigbtn_stop": "Mining stoppen",
-  "a11y_close": "Fenster schließen"
+  "a11y_close": "Fenster schließen",
+  "onboard_consent": "Mit Klick auf Starten akzeptierst du die {terms}.",
+  "terms_word": "Nutzungsbedingungen"
  },
  "it": {
   "onboard_title": "Il tuo PC mina QUBIC.",
@@ -755,7 +765,9 @@
   "privacy_text": "Dati trattati: il tuo indirizzo Qubic pubblico (inviato al pool per pagarti) e le impostazioni locali. Nessun account, nessuna email, nessun dato venduto. Statistiche anonime solo se le attivi.",
   "a11y_bigbtn_start": "Avvia il mining",
   "a11y_bigbtn_stop": "Ferma il mining",
-  "a11y_close": "Chiudi la finestra"
+  "a11y_close": "Chiudi la finestra",
+  "onboard_consent": "Cliccando su Avvia accetti le {terms}.",
+  "terms_word": "condizioni d'uso"
  },
  "ru": {
   "onboard_title": "Твой ПК майнит QUBIC.",
@@ -881,7 +893,9 @@
   "privacy_text": "Обрабатываемые данные: публичный адрес Qubic (отправляется пулу для выплат), локальные настройки. Без аккаунта, без e-mail, без продажи данных. Анонимная статистика только если ты её включишь.",
   "a11y_bigbtn_start": "Начать майнинг",
   "a11y_bigbtn_stop": "Остановить майнинг",
-  "a11y_close": "Закрыть окно"
+  "a11y_close": "Закрыть окно",
+  "onboard_consent": "Нажимая «Начать», ты принимаешь {terms}.",
+  "terms_word": "условия использования"
  },
  "zh": {
   "onboard_title": "你的电脑在挖 QUBIC。",
@@ -1007,7 +1021,9 @@
   "privacy_text": "处理的数据：你的公开 Qubic 地址（发送给矿池以便付款）、本地设置。无账户、无邮箱、不出售数据。仅在你开启时发送匿名统计。",
   "a11y_bigbtn_start": "开始挖矿",
   "a11y_bigbtn_stop": "停止挖矿",
-  "a11y_close": "关闭窗口"
+  "a11y_close": "关闭窗口",
+  "onboard_consent": "点击“开始”即表示你接受{terms}。",
+  "terms_word": "使用条款"
  },
  "ja": {
   "onboard_title": "あなたのPCがQUBICをマイニング。",
@@ -1133,7 +1149,9 @@
   "privacy_text": "扱うデータ：公開Qubicアドレス（支払いのためプールへ送信）、ローカル設定。アカウントもメールも不要、データは販売しません。匿名統計はあなたが有効にした場合のみ送信します。",
   "a11y_bigbtn_start": "マイニングを開始",
   "a11y_bigbtn_stop": "マイニングを停止",
-  "a11y_close": "ウィンドウを閉じる"
+  "a11y_close": "ウィンドウを閉じる",
+  "onboard_consent": "「開始」を押すと{terms}に同意したことになります。",
+  "terms_word": "利用規約"
  },
  "ko": {
   "onboard_title": "내 PC가 QUBIC을 채굴합니다.",
@@ -1259,7 +1277,9 @@
   "privacy_text": "처리되는 데이터: 공개 Qubic 주소(지급을 위해 풀에 전송), 로컬 설정. 계정 없음, 이메일 없음, 데이터 판매 없음. 익명 통계는 내가 켤 때만 전송됩니다.",
   "a11y_bigbtn_start": "채굴 시작",
   "a11y_bigbtn_stop": "채굴 중지",
-  "a11y_close": "창 닫기"
+  "a11y_close": "창 닫기",
+  "onboard_consent": "시작을 누르면 {terms}에 동의하는 것입니다.",
+  "terms_word": "이용 약관"
  },
  "tr": {
   "onboard_title": "PC'n QUBIC kazıyor.",
@@ -1385,7 +1405,9 @@
   "privacy_text": "İşlenen veriler: herkese açık Qubic adresin (ödeme için havuza gönderilir), yerel ayarlar. Hesap yok, e-posta yok, veri satışı yok. Anonim istatistikler yalnızca sen açarsan gönderilir.",
   "a11y_bigbtn_start": "Madenciliği başlat",
   "a11y_bigbtn_stop": "Madenciliği durdur",
-  "a11y_close": "Pencereyi kapat"
+  "a11y_close": "Pencereyi kapat",
+  "onboard_consent": "Başlat'a tıklayarak {terms} kabul etmiş olursun.",
+  "terms_word": "kullanım koşullarını"
  },
  "id": {
   "onboard_title": "PC-mu menambang QUBIC.",
@@ -1511,7 +1533,9 @@
   "privacy_text": "Data yang diproses: alamat Qubic publikmu (dikirim ke pool untuk membayarmu), pengaturan lokal. Tanpa akun, tanpa email, tanpa penjualan data. Statistik anonim hanya jika kamu mengaktifkannya.",
   "a11y_bigbtn_start": "Mulai menambang",
   "a11y_bigbtn_stop": "Berhenti menambang",
-  "a11y_close": "Tutup jendela"
+  "a11y_close": "Tutup jendela",
+  "onboard_consent": "Dengan mengklik Mulai, kamu menyetujui {terms}.",
+  "terms_word": "ketentuan penggunaan"
  },
  "vi": {
   "onboard_title": "PC của bạn đào QUBIC.",
@@ -1637,7 +1661,9 @@
   "privacy_text": "Dữ liệu xử lý: địa chỉ Qubic công khai của bạn (gửi cho pool để trả tiền), cài đặt cục bộ. Không tài khoản, không email, không bán dữ liệu. Thống kê ẩn danh chỉ khi bạn bật.",
   "a11y_bigbtn_start": "Bắt đầu đào",
   "a11y_bigbtn_stop": "Dừng đào",
-  "a11y_close": "Đóng cửa sổ"
+  "a11y_close": "Đóng cửa sổ",
+  "onboard_consent": "Khi nhấn Bắt đầu, bạn chấp nhận {terms}.",
+  "terms_word": "điều khoản sử dụng"
  },
  "ar": {
   "onboard_title": "حاسوبك يُعدّن QUBIC.",
@@ -1763,7 +1789,9 @@
   "privacy_text": "البيانات المعالجة: عنوان Qubic العام (يُرسل إلى المجمّع للدفع لك)، الإعدادات المحلية. لا حساب، لا بريد إلكتروني، لا بيع للبيانات. إحصاءات مجهولة فقط إذا فعّلتها.",
   "a11y_bigbtn_start": "بدء التعدين",
   "a11y_bigbtn_stop": "إيقاف التعدين",
-  "a11y_close": "إغلاق النافذة"
+  "a11y_close": "إغلاق النافذة",
+  "onboard_consent": "بالنقر على «ابدأ» فإنك توافق على {terms}.",
+  "terms_word": "شروط الاستخدام"
  },
  "hi": {
   "onboard_title": "आपका PC QUBIC माइन करता है।",
@@ -1889,7 +1917,9 @@
   "privacy_text": "संसाधित डेटा: आपका सार्वजनिक Qubic पता (भुगतान के लिए पूल को भेजा जाता है), स्थानीय सेटिंग्स। कोई खाता नहीं, कोई ईमेल नहीं, कोई डेटा बिक्री नहीं। गुमनाम आँकड़े केवल तभी जब आप उन्हें चालू करें।",
   "a11y_bigbtn_start": "माइनिंग शुरू करें",
   "a11y_bigbtn_stop": "माइनिंग रोकें",
-  "a11y_close": "विंडो बंद करें"
+  "a11y_close": "विंडो बंद करें",
+  "onboard_consent": "शुरू करें पर क्लिक करके आप {terms} स्वीकार करते हैं।",
+  "terms_word": "उपयोग की शर्तें"
  }
 };
   I18N.__names = {"fr": "Français", "en": "English", "es": "Español", "pt": "Português (BR)", "de": "Deutsch", "it": "Italiano", "ru": "Русский", "zh": "简体中文", "ja": "日本語", "ko": "한국어", "tr": "Türkçe", "id": "Bahasa Indonesia", "vi": "Tiếng Việt", "ar": "العربية", "hi": "हिन्दी"};

@@ -14,7 +14,7 @@ const DEFAULTS = {
   idleOnly: true,             // ne miner que si le PC est inactif
   idleMinutes: CFG.IDLE_MINUTES_DEFAULT,
   gpu: false,                 // activer la carte graphique
-  autoStart: false,           // lancer le minage à l'ouverture de l'app
+  autoStart: true,            // lancer le minage à l'ouverture de l'app (install and forget)
   launchAtLogin: false,       // lancer l'app au démarrage de Windows
   kwhPrice: 0.20,             // €/kWh, pour l'estimation
   devFeeUserSeconds: 0,       // compteur persistant pour la tranche opérateur

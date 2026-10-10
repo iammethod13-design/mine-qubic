@@ -55,7 +55,7 @@
   "wallet": "My wallet",
   "copy": "Copy",
   "copied": "Copied!",
-  "pool_stats": "My stats on pool.qubic.li",
+  "pool_stats": "My stats on qubic.li",
   "backup": "Back up my secret phrase",
   "backup_warn": "Your secret phrase (55 letters) gives access to all your QUBIC. Write it on paper, offline. Never share it: no legitimate person will ever ask for it.",
   "backup_done": "Done, I saved it",
@@ -128,7 +128,11 @@
   "a11y_close": "Close window",
   "onboard_consent": "By clicking Start, you accept the {terms}.",
   "terms_word": "terms of use",
-  "err_client_outdated": "The pool rejects this miner version and the automatic update failed. Try again later, or update the app."
+  "err_client_outdated": "The pool rejects this miner version and the automatic update failed. Try again later, or update the app.",
+  "pool_seen": "Seen by the pool ✓ · {rate} it/s · {shares} shares this epoch",
+  "pool_notseen": "Not seen by the pool yet (takes about 1 min)…",
+  "pool_notseen_long": "Still not seen by the pool after {min} min: check your internet connection, or stop and restart mining.",
+  "pool_check_fail": "Could not reach the pool to verify (stats.service.qubic.li)."
  },
  "fr": {
   "onboard_title": "Ton PC mine du QUBIC.",
@@ -184,7 +188,7 @@
   "wallet": "Mon wallet",
   "copy": "Copier",
   "copied": "Copié !",
-  "pool_stats": "Mes stats sur pool.qubic.li",
+  "pool_stats": "Mes stats sur qubic.li",
   "backup": "Sauvegarder ma phrase secrète",
   "backup_warn": "Ta phrase secrète (55 lettres) donne accès à tous tes QUBIC. Note-la sur papier, hors ligne. Ne la donne à personne : personne de légitime ne te la demandera.",
   "backup_done": "C'est noté, je l'ai sauvegardée",
@@ -257,7 +261,11 @@
   "a11y_close": "Fermer la fenêtre",
   "onboard_consent": "En cliquant sur Démarrer, tu acceptes les {terms}.",
   "terms_word": "conditions d'utilisation",
-  "err_client_outdated": "Le pool refuse cette version du mineur et la mise à jour automatique a échoué. Réessaie plus tard, ou mets l'app à jour."
+  "err_client_outdated": "Le pool refuse cette version du mineur et la mise à jour automatique a échoué. Réessaie plus tard, ou mets l'app à jour.",
+  "pool_seen": "Vu par le pool ✓ · {rate} it/s · {shares} shares cette epoch",
+  "pool_notseen": "Pas encore vu par le pool (compte environ 1 min)…",
+  "pool_notseen_long": "Toujours pas vu par le pool après {min} min : vérifie ta connexion internet, ou arrête et relance le minage.",
+  "pool_check_fail": "Pool injoignable pour vérifier (stats.service.qubic.li)."
  },
  "es": {
   "onboard_title": "Tu PC mina QUBIC.",
@@ -313,7 +321,7 @@
   "wallet": "Mi wallet",
   "copy": "Copiar",
   "copied": "¡Copiado!",
-  "pool_stats": "Mis estadísticas en pool.qubic.li",
+  "pool_stats": "Mis estadísticas en qubic.li",
   "backup": "Guardar mi frase secreta",
   "backup_warn": "Tu frase secreta (55 letras) da acceso a todos tus QUBIC. Anótala en papel, sin conexión. No se la des a nadie: nadie legítimo te la pedirá.",
   "backup_done": "Listo, ya la guardé",
@@ -386,7 +394,11 @@
   "a11y_close": "Cerrar la ventana",
   "onboard_consent": "Al pulsar Empezar aceptas las {terms}.",
   "terms_word": "condiciones de uso",
-  "err_client_outdated": "El pool rechaza esta versión del minero y la actualización automática falló. Inténtalo más tarde o actualiza la app."
+  "err_client_outdated": "El pool rechaza esta versión del minero y la actualización automática falló. Inténtalo más tarde o actualiza la app.",
+  "pool_seen": "Visto por el pool ✓ · {rate} it/s · {shares} shares en esta epoch",
+  "pool_notseen": "El pool aún no te ve (tarda alrededor de 1 min)…",
+  "pool_notseen_long": "El pool sigue sin verte tras {min} min: revisa tu conexión a internet, o detén y reinicia la minería.",
+  "pool_check_fail": "No se pudo contactar con el pool para verificar (stats.service.qubic.li)."
  },
  "pt": {
   "onboard_title": "Seu PC minera QUBIC.",
@@ -442,7 +454,7 @@
   "wallet": "Minha carteira",
   "copy": "Copiar",
   "copied": "Copiado!",
-  "pool_stats": "Minhas estatísticas em pool.qubic.li",
+  "pool_stats": "Minhas estatísticas em qubic.li",
   "backup": "Salvar minha frase secreta",
   "backup_warn": "Sua frase secreta (55 letras) dá acesso a todos os seus QUBIC. Anote em papel, offline. Não dê a ninguém: ninguém legítimo vai pedi-la.",
   "backup_done": "Pronto, já salvei",
@@ -515,7 +527,11 @@
   "a11y_close": "Fechar a janela",
   "onboard_consent": "Ao clicar em Começar, você aceita os {terms}.",
   "terms_word": "termos de uso",
-  "err_client_outdated": "O pool recusa esta versão do minerador e a atualização automática falhou. Tente mais tarde ou atualize o app."
+  "err_client_outdated": "O pool recusa esta versão do minerador e a atualização automática falhou. Tente mais tarde ou atualize o app.",
+  "pool_seen": "Visto pelo pool ✓ · {rate} it/s · {shares} shares nesta epoch",
+  "pool_notseen": "O pool ainda não te vê (leva cerca de 1 min)…",
+  "pool_notseen_long": "O pool ainda não te vê após {min} min: verifique sua conexão com a internet, ou pare e reinicie a mineração.",
+  "pool_check_fail": "Não foi possível contatar o pool para verificar (stats.service.qubic.li)."
  },
  "de": {
   "onboard_title": "Dein PC schürft QUBIC.",
@@ -571,7 +587,7 @@
   "wallet": "Meine Wallet",
   "copy": "Kopieren",
   "copied": "Kopiert!",
-  "pool_stats": "Meine Statistiken auf pool.qubic.li",
+  "pool_stats": "Meine Statistiken auf qubic.li",
   "backup": "Meine Geheimphrase sichern",
   "backup_warn": "Deine Geheimphrase (55 Buchstaben) gibt Zugriff auf alle deine QUBIC. Schreib sie auf Papier, offline. Gib sie niemandem: niemand Seriöses wird danach fragen.",
   "backup_done": "Erledigt, ich habe sie gesichert",
@@ -644,7 +660,11 @@
   "a11y_close": "Fenster schließen",
   "onboard_consent": "Mit Klick auf Starten akzeptierst du die {terms}.",
   "terms_word": "Nutzungsbedingungen",
-  "err_client_outdated": "Der Pool lehnt diese Miner-Version ab und das automatische Update ist fehlgeschlagen. Versuche es später erneut oder aktualisiere die App."
+  "err_client_outdated": "Der Pool lehnt diese Miner-Version ab und das automatische Update ist fehlgeschlagen. Versuche es später erneut oder aktualisiere die App.",
+  "pool_seen": "Vom Pool gesehen ✓ · {rate} it/s · {shares} Shares in dieser Epoche",
+  "pool_notseen": "Noch nicht vom Pool gesehen (dauert etwa 1 Min.)…",
+  "pool_notseen_long": "Nach {min} Min. immer noch nicht vom Pool gesehen: prüfe deine Internetverbindung oder stoppe das Mining und starte es neu.",
+  "pool_check_fail": "Pool zur Überprüfung nicht erreichbar (stats.service.qubic.li)."
  },
  "it": {
   "onboard_title": "Il tuo PC mina QUBIC.",
@@ -700,7 +720,7 @@
   "wallet": "Il mio wallet",
   "copy": "Copia",
   "copied": "Copiato!",
-  "pool_stats": "Le mie statistiche su pool.qubic.li",
+  "pool_stats": "Le mie statistiche su qubic.li",
   "backup": "Salva la mia frase segreta",
   "backup_warn": "La tua frase segreta (55 lettere) dà accesso a tutti i tuoi QUBIC. Scrivila su carta, offline. Non darla a nessuno: nessuna persona legittima te la chiederà.",
   "backup_done": "Fatto, l'ho salvata",
@@ -773,7 +793,11 @@
   "a11y_close": "Chiudi la finestra",
   "onboard_consent": "Cliccando su Avvia accetti le {terms}.",
   "terms_word": "condizioni d'uso",
-  "err_client_outdated": "Il pool rifiuta questa versione del miner e l'aggiornamento automatico è fallito. Riprova più tardi o aggiorna l'app."
+  "err_client_outdated": "Il pool rifiuta questa versione del miner e l'aggiornamento automatico è fallito. Riprova più tardi o aggiorna l'app.",
+  "pool_seen": "Visto dal pool ✓ · {rate} it/s · {shares} share in questa epoch",
+  "pool_notseen": "Non ancora visto dal pool (ci vuole circa 1 min)…",
+  "pool_notseen_long": "Ancora non visto dal pool dopo {min} min: controlla la connessione internet, oppure ferma e riavvia il mining.",
+  "pool_check_fail": "Impossibile contattare il pool per verificare (stats.service.qubic.li)."
  },
  "ru": {
   "onboard_title": "Твой ПК майнит QUBIC.",
@@ -829,7 +853,7 @@
   "wallet": "Мой кошелёк",
   "copy": "Копировать",
   "copied": "Скопировано!",
-  "pool_stats": "Моя статистика на pool.qubic.li",
+  "pool_stats": "Моя статистика на qubic.li",
   "backup": "Сохранить секретную фразу",
   "backup_warn": "Секретная фраза (55 букв) даёт доступ ко всем твоим QUBIC. Запиши её на бумаге, офлайн. Никому не передавай: никто честный её не попросит.",
   "backup_done": "Готово, я сохранил",
@@ -902,7 +926,11 @@
   "a11y_close": "Закрыть окно",
   "onboard_consent": "Нажимая «Начать», ты принимаешь {terms}.",
   "terms_word": "условия использования",
-  "err_client_outdated": "Пул отклоняет эту версию майнера, и автообновление не удалось. Попробуй позже или обнови приложение."
+  "err_client_outdated": "Пул отклоняет эту версию майнера, и автообновление не удалось. Попробуй позже или обнови приложение.",
+  "pool_seen": "Пул видит тебя ✓ · {rate} it/s · {shares} шар в этой эпохе",
+  "pool_notseen": "Пул пока тебя не видит (около 1 мин)…",
+  "pool_notseen_long": "Пул всё ещё не видит тебя спустя {min} мин: проверь интернет-соединение или останови и снова запусти майнинг.",
+  "pool_check_fail": "Не удалось связаться с пулом для проверки (stats.service.qubic.li)."
  },
  "zh": {
   "onboard_title": "你的电脑在挖 QUBIC。",
@@ -958,7 +986,7 @@
   "wallet": "我的钱包",
   "copy": "复制",
   "copied": "已复制！",
-  "pool_stats": "在 pool.qubic.li 查看我的数据",
+  "pool_stats": "在 qubic.li 查看我的数据",
   "backup": "备份我的助记词",
   "backup_warn": "你的助记词（55 个字母）可以控制你的全部 QUBIC。请离线写在纸上。不要告诉任何人：任何正规人员都不会向你索要。",
   "backup_done": "好了，我已备份",
@@ -1031,7 +1059,11 @@
   "a11y_close": "关闭窗口",
   "onboard_consent": "点击“开始”即表示你接受{terms}。",
   "terms_word": "使用条款",
-  "err_client_outdated": "矿池拒绝此矿工版本，且自动更新失败。请稍后重试或更新应用。"
+  "err_client_outdated": "矿池拒绝此矿工版本，且自动更新失败。请稍后重试或更新应用。",
+  "pool_seen": "矿池已识别 ✓ · {rate} it/s · 本 epoch {shares} 个份额",
+  "pool_notseen": "矿池尚未识别到你（约需 1 分钟）…",
+  "pool_notseen_long": "{min} 分钟后矿池仍未识别到你：请检查网络连接，或停止并重新开始挖矿。",
+  "pool_check_fail": "无法连接矿池进行验证（stats.service.qubic.li）。"
  },
  "ja": {
   "onboard_title": "あなたのPCがQUBICをマイニング。",
@@ -1087,7 +1119,7 @@
   "wallet": "マイウォレット",
   "copy": "コピー",
   "copied": "コピーしました",
-  "pool_stats": "pool.qubic.li で統計を見る",
+  "pool_stats": "qubic.li で統計を見る",
   "backup": "シークレットフレーズを保存",
   "backup_warn": "シークレットフレーズ（55文字）はあなたのQUBICすべてにアクセスできます。オフラインで紙に書いてください。誰にも渡さないでください：正当な相手が尋ねることはありません。",
   "backup_done": "保存しました",
@@ -1160,7 +1192,11 @@
   "a11y_close": "ウィンドウを閉じる",
   "onboard_consent": "「開始」を押すと{terms}に同意したことになります。",
   "terms_word": "利用規約",
-  "err_client_outdated": "プールはこのマイナーのバージョンを拒否し、自動更新に失敗しました。後でもう一度試すか、アプリを更新してください。"
+  "err_client_outdated": "プールはこのマイナーのバージョンを拒否し、自動更新に失敗しました。後でもう一度試すか、アプリを更新してください。",
+  "pool_seen": "プールに認識されています ✓ · {rate} it/s · この epoch のシェア {shares}",
+  "pool_notseen": "まだプールに認識されていません（約 1 分かかります）…",
+  "pool_notseen_long": "{min} 分経ってもプールに認識されていません。インターネット接続を確認するか、マイニングを停止して再開してください。",
+  "pool_check_fail": "確認のためプールに接続できませんでした（stats.service.qubic.li）。"
  },
  "ko": {
   "onboard_title": "내 PC가 QUBIC을 채굴합니다.",
@@ -1216,7 +1252,7 @@
   "wallet": "내 지갑",
   "copy": "복사",
   "copied": "복사됨!",
-  "pool_stats": "pool.qubic.li에서 내 통계 보기",
+  "pool_stats": "qubic.li에서 내 통계 보기",
   "backup": "비밀 문구 백업",
   "backup_warn": "비밀 문구(55자)는 내 모든 QUBIC에 접근할 수 있습니다. 오프라인으로 종이에 적어 두세요. 누구에게도 알려주지 마세요: 정상적인 사람은 절대 묻지 않습니다.",
   "backup_done": "완료, 저장했어요",
@@ -1289,7 +1325,11 @@
   "a11y_close": "창 닫기",
   "onboard_consent": "시작을 누르면 {terms}에 동의하는 것입니다.",
   "terms_word": "이용 약관",
-  "err_client_outdated": "풀이 이 채굴기 버전을 거부했고 자동 업데이트가 실패했습니다. 나중에 다시 시도하거나 앱을 업데이트하세요."
+  "err_client_outdated": "풀이 이 채굴기 버전을 거부했고 자동 업데이트가 실패했습니다. 나중에 다시 시도하거나 앱을 업데이트하세요.",
+  "pool_seen": "풀에서 확인됨 ✓ · {rate} it/s · 이번 epoch 셰어 {shares}개",
+  "pool_notseen": "아직 풀에서 확인되지 않음 (약 1분 소요)…",
+  "pool_notseen_long": "{min}분이 지나도 풀에서 확인되지 않습니다. 인터넷 연결을 확인하거나 채굴을 중지했다가 다시 시작하세요.",
+  "pool_check_fail": "확인을 위해 풀에 연결할 수 없습니다 (stats.service.qubic.li)."
  },
  "tr": {
   "onboard_title": "PC'n QUBIC kazıyor.",
@@ -1345,7 +1385,7 @@
   "wallet": "Cüzdanım",
   "copy": "Kopyala",
   "copied": "Kopyalandı!",
-  "pool_stats": "pool.qubic.li'de istatistiklerim",
+  "pool_stats": "qubic.li'de istatistiklerim",
   "backup": "Gizli ifademi yedekle",
   "backup_warn": "Gizli ifaden (55 harf) tüm QUBIC'lerine erişim sağlar. Çevrimdışı olarak kâğıda yaz. Kimseye verme: meşru hiç kimse bunu istemez.",
   "backup_done": "Tamam, yedekledim",
@@ -1418,7 +1458,11 @@
   "a11y_close": "Pencereyi kapat",
   "onboard_consent": "Başlat'a tıklayarak {terms} kabul etmiş olursun.",
   "terms_word": "kullanım koşullarını",
-  "err_client_outdated": "Havuz bu madenci sürümünü reddediyor ve otomatik güncelleme başarısız oldu. Daha sonra tekrar dene veya uygulamayı güncelle."
+  "err_client_outdated": "Havuz bu madenci sürümünü reddediyor ve otomatik güncelleme başarısız oldu. Daha sonra tekrar dene veya uygulamayı güncelle.",
+  "pool_seen": "Havuz seni görüyor ✓ · {rate} it/s · bu epoch {shares} pay",
+  "pool_notseen": "Havuz seni henüz görmüyor (yaklaşık 1 dk sürer)…",
+  "pool_notseen_long": "{min} dk sonra havuz seni hâlâ görmüyor: internet bağlantını kontrol et veya madenciliği durdurup yeniden başlat.",
+  "pool_check_fail": "Doğrulama için havuza ulaşılamadı (stats.service.qubic.li)."
  },
  "id": {
   "onboard_title": "PC-mu menambang QUBIC.",
@@ -1474,7 +1518,7 @@
   "wallet": "Dompet saya",
   "copy": "Salin",
   "copied": "Tersalin!",
-  "pool_stats": "Statistik saya di pool.qubic.li",
+  "pool_stats": "Statistik saya di qubic.li",
   "backup": "Cadangkan frasa rahasia saya",
   "backup_warn": "Frasa rahasiamu (55 huruf) memberi akses ke semua QUBIC-mu. Tulis di kertas, secara offline. Jangan berikan ke siapa pun: tidak ada pihak sah yang akan memintanya.",
   "backup_done": "Selesai, sudah saya simpan",
@@ -1547,7 +1591,11 @@
   "a11y_close": "Tutup jendela",
   "onboard_consent": "Dengan mengklik Mulai, kamu menyetujui {terms}.",
   "terms_word": "ketentuan penggunaan",
-  "err_client_outdated": "Pool menolak versi penambang ini dan pembaruan otomatis gagal. Coba lagi nanti atau perbarui aplikasi."
+  "err_client_outdated": "Pool menolak versi penambang ini dan pembaruan otomatis gagal. Coba lagi nanti atau perbarui aplikasi.",
+  "pool_seen": "Terlihat oleh pool ✓ · {rate} it/s · {shares} share epoch ini",
+  "pool_notseen": "Belum terlihat oleh pool (butuh sekitar 1 menit)…",
+  "pool_notseen_long": "Masih belum terlihat oleh pool setelah {min} menit: periksa koneksi internetmu, atau hentikan dan mulai ulang penambangan.",
+  "pool_check_fail": "Tidak dapat menghubungi pool untuk memverifikasi (stats.service.qubic.li)."
  },
  "vi": {
   "onboard_title": "PC của bạn đào QUBIC.",
@@ -1603,7 +1651,7 @@
   "wallet": "Ví của tôi",
   "copy": "Sao chép",
   "copied": "Đã sao chép!",
-  "pool_stats": "Thống kê của tôi trên pool.qubic.li",
+  "pool_stats": "Thống kê của tôi trên qubic.li",
   "backup": "Sao lưu cụm từ bí mật",
   "backup_warn": "Cụm từ bí mật (55 chữ) cho phép truy cập toàn bộ QUBIC của bạn. Ghi ra giấy, ngoại tuyến. Không đưa cho ai: không ai hợp pháp sẽ hỏi nó.",
   "backup_done": "Xong, tôi đã lưu",
@@ -1676,7 +1724,11 @@
   "a11y_close": "Đóng cửa sổ",
   "onboard_consent": "Khi nhấn Bắt đầu, bạn chấp nhận {terms}.",
   "terms_word": "điều khoản sử dụng",
-  "err_client_outdated": "Pool từ chối phiên bản trình đào này và cập nhật tự động thất bại. Thử lại sau hoặc cập nhật ứng dụng."
+  "err_client_outdated": "Pool từ chối phiên bản trình đào này và cập nhật tự động thất bại. Thử lại sau hoặc cập nhật ứng dụng.",
+  "pool_seen": "Pool đã thấy bạn ✓ · {rate} it/s · {shares} share trong epoch này",
+  "pool_notseen": "Pool chưa thấy bạn (mất khoảng 1 phút)…",
+  "pool_notseen_long": "Sau {min} phút pool vẫn chưa thấy bạn: kiểm tra kết nối internet, hoặc dừng rồi khởi động lại việc đào.",
+  "pool_check_fail": "Không thể liên hệ pool để kiểm tra (stats.service.qubic.li)."
  },
  "ar": {
   "onboard_title": "حاسوبك يُعدّن QUBIC.",
@@ -1732,7 +1784,7 @@
   "wallet": "محفظتي",
   "copy": "نسخ",
   "copied": "تم النسخ!",
-  "pool_stats": "إحصائياتي على pool.qubic.li",
+  "pool_stats": "إحصائياتي على qubic.li",
   "backup": "احفظ عبارتي السرية",
   "backup_warn": "عبارتك السرية (55 حرفاً) تمنح الوصول إلى كل QUBIC لديك. اكتبها على ورقة، دون اتصال. لا تعطها لأحد: لن يطلبها منك أي جهة شرعية.",
   "backup_done": "تم، لقد حفظتها",
@@ -1805,7 +1857,11 @@
   "a11y_close": "إغلاق النافذة",
   "onboard_consent": "بالنقر على «ابدأ» فإنك توافق على {terms}.",
   "terms_word": "شروط الاستخدام",
-  "err_client_outdated": "يرفض المجمّع هذا الإصدار من المُعدِّن وفشل التحديث التلقائي. حاول لاحقاً أو حدّث التطبيق."
+  "err_client_outdated": "يرفض المجمّع هذا الإصدار من المُعدِّن وفشل التحديث التلقائي. حاول لاحقاً أو حدّث التطبيق.",
+  "pool_seen": "المجمّع يراك ✓ · {rate} it/s · {shares} حصة في هذه الحقبة",
+  "pool_notseen": "المجمّع لا يراك بعد (يستغرق نحو دقيقة)…",
+  "pool_notseen_long": "المجمّع لا يزال لا يراك بعد {min} دقيقة: تحقق من اتصالك بالإنترنت، أو أوقف التعدين وأعد تشغيله.",
+  "pool_check_fail": "تعذّر الوصول إلى المجمّع للتحقق (stats.service.qubic.li)."
  },
  "hi": {
   "onboard_title": "आपका PC QUBIC माइन करता है।",
@@ -1861,7 +1917,7 @@
   "wallet": "मेरा वॉलेट",
   "copy": "कॉपी",
   "copied": "कॉपी हो गया!",
-  "pool_stats": "pool.qubic.li पर मेरे आँकड़े",
+  "pool_stats": "qubic.li पर मेरे आँकड़े",
   "backup": "मेरा गुप्त वाक्यांश सहेजें",
   "backup_warn": "आपका गुप्त वाक्यांश (55 अक्षर) आपके सभी QUBIC तक पहुँच देता है। इसे ऑफ़लाइन कागज़ पर लिखें। किसी को न दें: कोई भी वैध व्यक्ति इसे कभी नहीं माँगेगा।",
   "backup_done": "हो गया, मैंने सहेज लिया",
@@ -1934,7 +1990,11 @@
   "a11y_close": "विंडो बंद करें",
   "onboard_consent": "शुरू करें पर क्लिक करके आप {terms} स्वीकार करते हैं।",
   "terms_word": "उपयोग की शर्तें",
-  "err_client_outdated": "पूल इस माइनर संस्करण को अस्वीकार करता है और स्वचालित अपडेट विफल रहा। बाद में फिर कोशिश करें या ऐप अपडेट करें।"
+  "err_client_outdated": "पूल इस माइनर संस्करण को अस्वीकार करता है और स्वचालित अपडेट विफल रहा। बाद में फिर कोशिश करें या ऐप अपडेट करें।",
+  "pool_seen": "पूल ने आपको देखा ✓ · {rate} it/s · इस epoch में {shares} शेयर",
+  "pool_notseen": "पूल ने अभी आपको नहीं देखा (लगभग 1 मिनट लगता है)…",
+  "pool_notseen_long": "{min} मिनट बाद भी पूल ने आपको नहीं देखा: अपना इंटरनेट कनेक्शन जाँचें, या माइनिंग रोककर फिर से शुरू करें।",
+  "pool_check_fail": "सत्यापन के लिए पूल से संपर्क नहीं हो सका (stats.service.qubic.li)।"
  }
 };
   I18N.__names = {"en": "English", "fr": "Français", "es": "Español", "pt": "Português (BR)", "de": "Deutsch", "it": "Italiano", "ru": "Русский", "zh": "简体中文", "ja": "日本語", "ko": "한국어", "tr": "Türkçe", "id": "Bahasa Indonesia", "vi": "Tiếng Việt", "ar": "العربية", "hi": "हिन्दी"};

@@ -77,4 +77,31 @@ function estimate({ history = [], priceEur, threads = 0, gpu = false, kwhPrice =
   return { lastPayout: last, watts, elecDay, grossDay, netDay: grossDay - elecDay, payouts: gains.length };
 }
 
-module.exports = { getBalance, getTickInfo, getPrice, nextEpochEnd, estimate };
+/**
+ * Ce que le pool voit réellement pour une adresse (stats.service.qubic.li, utilisé par platform.qubic.li).
+ * Indépendant des logs du client : c'est LA preuve que le minage est bien attribué à l'adresse.
+ * 404 = adresse inconnue du pool. Renvoie { visible, hashrate, shares, workers, activeWorkers, lastSeen, epoch }.
+ */
+async function getPoolStats(id) {
+  const r = await fetch(`${CFG.POOL_STATS_API}/api/pool/address/${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(8000) });
+  if (r.status === 404) return { visible: false };
+  if (!r.ok) throw new Error('http_' + r.status);
+  const d = await r.json();
+  const sum = (o) => Object.values(o || {}).reduce((a, b) => a + (Number(b) || 0), 0);
+  const workers = Array.isArray(d.workers) ? d.workers : [];
+  const now = Date.now();
+  const active = workers.filter((w) => w.lastSeen && !String(w.lastSeen).startsWith('0001') && now - Date.parse(w.lastSeen) < 10 * 60 * 1000);
+  const st = d.stats || {};
+  return {
+    visible: true,
+    hashrate: sum(d.hashrateByType || st.hashrateByType),
+    shares: sum(st.sharesByType) || workers.reduce((a, w) => a + (Number(w.shares) || 0), 0),
+    solutions: Number(st.solutions) || 0,
+    workers: workers.length,
+    activeWorkers: active.length,
+    lastSeen: active.length ? active.map((w) => Date.parse(w.lastSeen)).sort().pop() : null,
+    epoch: st.epoch || null,
+  };
+}
+
+module.exports = { getBalance, getTickInfo, getPrice, nextEpochEnd, estimate, getPoolStats };

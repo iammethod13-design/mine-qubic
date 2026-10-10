@@ -29,6 +29,7 @@
     { const el = $('onboard-consent'); el.textContent = ''; const parts = t('onboard_consent', { terms: '\u0000' }).split('\u0000');
       el.append(parts[0]); const b = document.createElement('button'); b.type = 'button'; b.textContent = t('terms_word'); b.onclick = () => $('modal-terms').classList.remove('hidden'); el.append(b); el.append(parts[1] || ''); }
     $('onboard-login-row').style.display = C.platform === 'linux' ? 'none' : '';
+    if (typeof renderPool === 'function') renderPool();
     $('ref-hint').textContent = t('referral_hint', { pct: Math.round((C.referralShare || 0) * 100) });
     renderSettings();
     renderStatus();
@@ -111,6 +112,21 @@
     renderUptime();
     if (status.wanted && !uptimeTimer) uptimeTimer = setInterval(renderUptime, 30000);
     if (!status.wanted && uptimeTimer) { clearInterval(uptimeTimer); uptimeTimer = null; }
+  }
+  /* ce que le pool voit réellement (vérification indépendante des logs du mineur) */
+  let POOL = null;
+  function renderPool() {
+    const el = $('pool-line');
+    const mining = status.state === 'running' || status.state === 'devfee';
+    if (!POOL || !mining) { el.classList.add('hidden'); return; }
+    el.className = 'nag info';
+    if (POOL.error && POOL.visible == null) { el.textContent = t('pool_check_fail'); el.className = 'nag'; }
+    else if (POOL.visible) el.textContent = t('pool_seen', { rate: fmtRate(POOL.hashrate), shares: fmtNum(POOL.shares || 0) });
+    else {
+      const min = POOL.miningSince ? Math.floor((Date.now() - POOL.miningSince) / 60000) : 0;
+      if (min >= 5) { el.textContent = t('pool_notseen_long', { min }); el.className = 'nag danger'; }
+      else el.textContent = t('pool_notseen');
+    }
   }
   function renderUptime() {
     $('s-uptime').textContent = status.startedAt && (status.state === 'running' || status.state === 'devfee') ? fmtDur(Date.now() - status.startedAt) : '—';
@@ -299,7 +315,7 @@
     };
 
     $('b-copy').onclick = () => { if (S.wallet) { window.mq.copy(S.wallet.id); toast(t('copied')); } };
-    $('b-pool').onclick = () => window.mq.openExternal(C.poolDashboard);
+    $('b-pool').onclick = () => window.mq.openExternal(S.wallet && C.poolPublicPage ? C.poolPublicPage + S.wallet.id : C.poolDashboard);
     $('b-connect').onclick = openConnect;
     $('connect-wallet').onclick = () => window.mq.openExternal(C.walletUrl);
     $('connect-backup').onclick = () => { $('modal-connect').classList.add('hidden'); openBackup(); };
@@ -321,7 +337,8 @@
     $('sell-close').onclick = () => $('modal-sell').classList.add('hidden');
     $('b-quit').onclick = () => window.mq.quit();
 
-    window.mq.onStatus((s) => { status = s; renderStatus(); $('int-hint').textContent = t('int_hint', { t: s.threads, n: s.cpuThreads }); });
+    window.mq.onStatus((s) => { status = s; renderStatus(); renderPool(); $('int-hint').textContent = t('int_hint', { t: s.threads, n: s.cpuThreads }); });
+    if (window.mq.onPool) window.mq.onPool((p) => { POOL = p; renderPool(); });
     window.mq.onLine(appendLog);
     window.mq.onWallet((w) => { S.wallet = w; renderWallet(); refreshBalance(); });
     if (window.mq.onSys) window.mq.onSys((s) => { SYS = s; renderSys(); renderSettings(); });

@@ -15,6 +15,7 @@ contextBridge.exposeInMainWorld('mq', {
   checkUpdate: () => ipcRenderer.invoke('app:checkUpdate'),
   installUpdate: () => ipcRenderer.invoke('app:installUpdate'),
   balance: () => ipcRenderer.invoke('chain:balance'),
+  poolCheck: () => ipcRenderer.invoke('pool:check'),
   openExternal: (url) => ipcRenderer.invoke('app:openExternal', url),
   copy: (t) => ipcRenderer.invoke('app:copy', t),
   lines: () => ipcRenderer.invoke('app:lines'),
@@ -25,4 +26,5 @@ contextBridge.exposeInMainWorld('mq', {
   onSys: (cb) => ipcRenderer.on('sys', (_e, s) => cb(s)),
   onAppUpdate: (cb) => ipcRenderer.on('appUpdate', (_e, u) => cb(u)),
   onPayout: (cb) => ipcRenderer.on('payout', (_e, p) => cb(p)),
+  onPool: (cb) => ipcRenderer.on('pool', (_e, p) => cb(p)),
 });

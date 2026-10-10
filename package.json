@@ -1,7 +1,7 @@
 {
   "name": "mine-qubic",
   "productName": "Mine Qubic",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "One click and your PC mines QUBIC on the qubic.li pool (non-custodial).",
   "main": "src/main.js",
   "author": "Cointribune",

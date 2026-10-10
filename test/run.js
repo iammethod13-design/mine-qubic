@@ -66,6 +66,14 @@ const ok = (name) => { passed++; console.log('  ✓', name); };
   client._onLine('2026-10-10 08:08:05.000 [ERRO] Client version too old, update required');
   assert.strictEqual(outdated, true); ok('détecte un client obsolète rejeté par le pool');
   assert.strictEqual(client.spec.sha256.length, 64); assert.ok(client.exePath.endsWith(CFG.CLIENT[process.platform === 'win32' ? 'win32' : 'linux'].exe)); ok('spec client');
+  // régression 10/10/2026 : le zip officiel contient un accessToken de démo ; s'il reste, le pool
+  // n'attribue rien à l'adresse → on doit toujours réécrire appsettings.json sans token.
+  fs.mkdirSync(client.dir, { recursive: true });
+  fs.writeFileSync(path.join(client.dir, 'appsettings.json'), JSON.stringify({ ClientSettings: { accessToken: 'eyJhbGciOi.demo.token' } }));
+  assert.strictEqual(client.settingsClean(), false);
+  client.writeSettings();
+  const cs = JSON.parse(fs.readFileSync(path.join(client.dir, 'appsettings.json'), 'utf8')).ClientSettings;
+  assert.strictEqual(client.settingsClean(), true); assert.strictEqual(cs.accessToken, undefined); assert.strictEqual(cs.poolAddress, CFG.POOL_WS); assert.strictEqual(cs.pps, true); ok('appsettings.json réécrit SANS le token de démo du zip officiel (sinon le pool n\'attribue rien à l\'adresse)');
 
   console.log('scheduler (client simulé)');
   class FakeClient extends EventEmitter {

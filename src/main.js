@@ -23,6 +23,7 @@ let quitting = false;
 let sys = { cpuVersion: null };
 let notifiedBalance = null;
 let fullscreen = null;
+let poolSeen = { checkedAt: 0, visible: null, miningSince: null }; // ce que le pool voit (stats.service.qubic.li)
 const MOCK = process.argv.includes('--mock-miner'); // tests UI : client simulé
 
 const LANGS = Object.keys(I18N).filter((k) => !k.startsWith('__'));
@@ -99,6 +100,24 @@ function send(channel, payload) {
   if (win && !win.isDestroyed()) win.webContents.send(channel, payload);
 }
 
+/** Vérification indépendante : le pool voit-il vraiment notre adresse ? (toutes les 60 s pendant le minage)
+ *  C'est ce qui aurait détecté le bug du token de démo (10/10/2026) : des it/s dans les logs, rien sur le pool. */
+async function pollPool(force) {
+  const w = store.get('wallet');
+  const snap = scheduler ? scheduler.snapshot() : {};
+  const mining = snap.state === 'running' || snap.state === 'devfee';
+  if (!w || (!mining && !force)) { if (!mining) poolSeen.miningSince = null; return; }
+  if (mining && !poolSeen.miningSince) poolSeen.miningSince = snap.startedAt || Date.now();
+  try {
+    const p = MOCK ? { visible: true, hashrate: 100, shares: 3, workers: 1, activeWorkers: 1, lastSeen: Date.now(), epoch: 234 } : await chain.getPoolStats(w.id);
+    poolSeen = { ...poolSeen, ...p, checkedAt: Date.now(), error: null };
+  } catch (e) {
+    poolSeen = { ...poolSeen, checkedAt: Date.now(), error: String(e && e.message || e) };
+  }
+  send('pool', { ...poolSeen, mining, address: w.id });
+  return poolSeen;
+}
+
 /** Notification "paiement reçu" quand le solde on-chain augmente. */
 async function pollPayout() {
   const w = store.get('wallet');
@@ -128,6 +147,7 @@ function publicConfig() {
     devFeeSlice: CFG.DEV_FEE_SLICE_MINUTES,
     referralShare: CFG.REFERRAL_SHARE || 0,
     poolDashboard: CFG.POOL_DASHBOARD,
+    poolPublicPage: CFG.POOL_PUBLIC_PAGE,
     walletUrl: CFG.WALLET_URL || 'https://wallet.qubic.org',
     exchanges: CFG.EXCHANGES,
     clientVersion: client.spec.version,
@@ -219,6 +239,7 @@ function setupIpc() {
     return QR.toDataURL(w.id, { margin: 1, width: 220, color: { dark: '#16171bff', light: '#ffffffff' } });
   });
 
+  ipcMain.handle('pool:check', () => pollPool(true));
   ipcMain.handle('chain:balance', async () => {
     const w = store.get('wallet');
     if (!w) return null;
@@ -262,6 +283,8 @@ app.whenReady().then(async () => {
   sysinfo.collect().then((i) => { Object.assign(sys, i); send('sys', { ...sys }); });
   setInterval(pollPayout, 10 * 60 * 1000);
   setTimeout(pollPayout, 15000);
+  setInterval(() => pollPool(false).catch(() => {}), 60 * 1000);
+  setTimeout(() => pollPool(false).catch(() => {}), 45 * 1000);
   const tele = () => telemetry.ping({ store, version: app.getVersion(), sys, threads: scheduler.threads() }).catch(() => {});
   setTimeout(tele, 60000); setInterval(tele, 6 * 3600 * 1000);
 

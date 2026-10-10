@@ -63,7 +63,11 @@ module.exports = {
 
   // Pool
   POOL_WS: 'wss://wps.qubic.li/ws',
-  POOL_DASHBOARD: 'https://pool.qubic.li',
+  // pool.qubic.li est déprécié (bandeau sur le site) → platform.qubic.li. Page publique par adresse :
+  // POOL_PUBLIC_PAGE + <adresse>. Stats JSON indépendantes du client : POOL_STATS_API/api/pool/address/<adresse>
+  POOL_DASHBOARD: 'https://platform.qubic.li',
+  POOL_PUBLIC_PAGE: 'https://platform.qubic.li/public/id/',
+  POOL_STATS_API: 'https://stats.service.qubic.li',
   WALLET_URL: 'https://wallet.qubic.org',
 
   // Données on-chain et prix

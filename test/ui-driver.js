@@ -40,6 +40,12 @@ async function run() {
   assert.ok(/it\/s/.test(speed)); ok('vitesse affichée : ' + speed);
   assert.strictEqual(await js(`document.getElementById('bigbtn').getAttribute('aria-pressed')`), 'true'); ok('aria-pressed');
 
+  // visibilité sur le pool (vérification indépendante, mockée) : la ligne doit apparaître et citer le hashrate vu par le pool
+  await js(`window.mq.poolCheck()`); await sleep(600);
+  assert.strictEqual(await visible('pool-line'), true);
+  const poolLine = await js(`document.getElementById('pool-line').textContent`);
+  assert.ok(/✓/.test(poolLine) && /100/.test(poolLine), poolLine); ok('ligne « vu par le pool ✓ » : ' + poolLine);
+
   // réglages
   await js(`document.querySelector('#seg-int button[data-v="100"]').click()`); await sleep(800);
   const threads = await js(`document.getElementById('s-threads').textContent`);

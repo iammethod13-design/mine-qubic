@@ -14,7 +14,7 @@ Utilisateur ──clic──▶ Mine Qubic ──lance──▶ qli-Client (offi
    qli-Client.exe --ClientSettings:QubicAddress=<ID utilisateur> --ClientSettings:Alias=MQ-xxxxxx
                   --ClientSettings:Trainer:CpuThreads=<n> --ClientSettings:Trainer:Gpu=false --ClientSettings:AutoUpdate=true
    ```
-   C'est le mode « registerless » documenté par qubic.li : l'adresse Qubic sert d'identifiant, l'utilisateur voit ses stats sur pool.qubic.li en se connectant avec son adresse.
+   C'est le mode « registerless » documenté par qubic.li : l'adresse Qubic sert d'identifiant. **Important** : le zip officiel contient un `appsettings.json` avec un *token de démo* ; s'il reste en place, le client tourne mais le pool n'attribue rien à l'adresse (bug corrigé en 0.3.1 : l'app réécrit ce fichier sans token avant chaque lancement). Stats publiques par adresse : `https://platform.qubic.li/public/id/<adresse>` (pool.qubic.li est déprécié) ; JSON brut : `https://stats.service.qubic.li/api/pool/address/<adresse>` (404 = adresse inconnue du pool). L'app interroge ce JSON toutes les 60 s pendant le minage et affiche « Vu par le pool ✓ · it/s · shares » — ou une alerte après 5 min sans visibilité.
 2. **Mode inactif (par défaut)** : ne mine que si le PC est inactif depuis 3 min (réglable) et coupe dans les 5 s dès que l'utilisateur touche au clavier ou à la souris. Mode « toujours » disponible, avec 3 niveaux de puissance (25 / 50 / 100 % des cœurs). GPU NVIDIA en option (désactivé si aucune carte détectée).
 3. **Gains** : solde on-chain du wallet (`rpc.qubic.org`), valeur en € (CoinGecko), date du prochain paiement du pool (mercredi 12:00 UTC), notification Windows « Paiement reçu » quand le solde augmente.
 4. **Frais de l'app (ton revenu)** : modèle « dev fee » comme XMRig / T-Rex. Après 161,7 min de minage utilisateur, le client est relancé **5 min sur ton adresse**, puis revient à l'utilisateur. 5 / (161,7 + 5) = **3 %**. Compteur persistant, pourcentage affiché à l'utilisateur. Aucun fonds ne transite par toi : pas de backend, rien de custodial.
@@ -49,13 +49,13 @@ Dépôt : https://github.com/iammethod13-design/mine-qubic — release publiée 
 
 ```
 npm install
-npm run test:all          # 41 tests unitaires + 17 tests UI (Linux : xvfb-run -a npm run test:ui)
+npm run test:all          # 44 tests unitaires + 21 tests UI (Linux : xvfb-run -a npm run test:ui)
 npm run build:win         # Windows : installateur NSIS un clic + portable (dist/)
 npm run build:linux       # AppImage
 ```
 Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) ; l'installateur demande Wine. Les traductions se régénèrent avec `python3 scripts/i18n_src.py`, l'icône avec `python3 scripts/make_icon.py`.
 
-## État (v0.2.0)
+## État (v0.3.1)
 
 ### Fait
 - Onboarding 1 clic, wallet local chiffré, téléchargement vérifié du client, lancement/arrêt propre, redémarrage auto.
@@ -66,7 +66,7 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 - Connexion wallet : QR, wallet.qubic.org, export seed, import adresse/seed.
 - 15 langues, RTL, détection de la langue de Windows. CGU + confidentialité affichées au premier lancement et dans l'app.
 - Télémétrie **opt-in** anonyme (désactivée par défaut, URL à renseigner).
-- Accessibilité : focus visible, aria, Échap ferme les fenêtres, réduction des animations. **41 tests unitaires + 17 tests UI** (`npm run test:all`).
+- Accessibilité : focus visible, aria, Échap ferme les fenêtres, réduction des animations. **44 tests unitaires + 21 tests UI** (`npm run test:all`).
 - Logo et couleurs du brand kit Qubic. Landing page FR/EN (`site/`). Docs : CGU, confidentialité, protocole de test de rentabilité, guide de signature.
 
 ### Reste à faire (et par qui)
@@ -82,6 +82,7 @@ Depuis Linux/macOS, seul le zip se construit (`npx electron-builder --win zip`) 
 
 ## Validé sur ton PC (10 oct. 2026)
 
+- **Bug 0.3.0 et antérieurs (corrigé en 0.3.1)** : ~8 h de minage sur SBZR… sans aucune trace sur le pool. Cause : le token de démo du zip officiel. Reproduit en sandbox : adresse neuve + token → `No stats found` ; même adresse sans token → visible sur `stats.service.qubic.li` en < 1 min (worker, hashrate, shares). Test unitaire + ligne « Vu par le pool ✓ » ajoutés.
 - Le client **3.8.10** était refusé par le pool (`AUTHENTICATION FAILED`) : version trop ancienne. Avec **3.9.1**, le mode sans compte fonctionne : connexion, authentification, téléchargement du trainer, minage (≈ 10 it/s par thread AVX-512 sur la machine de test). L'app épingle désormais 3.9.1, et traite un refus d'authentification comme un signal de mise à jour du mineur.
 - Format des lignes de vitesse (3.9.x) : `E:234 | SHARES: 3/5 (R:0) | [AVX512] 22 it/s | 21 avg it/s` — parsé (CPU + GPU additionnés, epoch, shares).
 - Ta machine de test : Ryzen 7 7435HS (AVX2 seulement, pas d'AVX-512), 16 Go, RTX 3050 Laptop. Les Ryzen 7000 "HS" (Zen 3+) n'ont pas l'AVX-512 : attends-toi à une vitesse nettement inférieure à un Ryzen 7000 de bureau.
@@ -100,7 +101,7 @@ src/updater.js       ← electron-updater (mises à jour de l'app)
 src/store.js         ← settings.json (dans %APPDATA%\Mine Qubic)
 src/renderer/        ← UI (HTML/CSS/JS), i18n.js généré (15 langues)
 scripts/i18n_src.py  ← source des traductions ; scripts/make_icon.py ← icône depuis la marque Qubic
-test/run.js          ← 41 tests unitaires ; test/ui.js ← 17 tests UI (app réelle + mineur simulé)
+test/run.js          ← 44 tests unitaires ; test/ui.js ← 21 tests UI (app réelle + mineur simulé)
 src/fullscreen.js    ← détection plein écran (PowerShell/WinAPI) ; src/telemetry.js ← stats opt-in
 site/index.html      ← landing page FR/EN ; docs/ ← CGU, confidentialité, signature, rentabilité, GitHub
 .github/workflows/   ← release.yml : tests + build Windows/Linux + publication

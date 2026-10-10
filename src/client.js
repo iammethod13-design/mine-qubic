@@ -133,15 +133,25 @@ class MinerClient extends EventEmitter {
     fs.writeFileSync(this.versionFile, spec.version);
   }
 
-  /** Le zip officiel contient un appsettings.json avec le token "anonyme" du pool :
-   *  on le garde tel quel (tout le reste passe en arguments de ligne de commande).
-   *  S'il manque, on en écrit un minimal. */
+  /** Le zip officiel contient un appsettings.json avec un `accessToken` de démo (compte qubic.li
+   *  e1879c47…). Si ce token est présent, le client s'authentifie avec LUI : le pool ne reçoit
+   *  jamais le runner courant et n'attribue RIEN à l'adresse passée en `QubicAddress` (vérifié le
+   *  10/10/2026 : adresse invisible sur stats.service.qubic.li avec le token, visible en < 1 min sans).
+   *  On écrit donc TOUJOURS notre propre fichier, sans token, avant chaque lancement. */
   writeSettings() {
     const file = path.join(this.dir, 'appsettings.json');
-    if (fs.existsSync(file)) return;
-    fs.writeFileSync(file, JSON.stringify({
-      ClientSettings: { poolAddress: CFG.POOL_WS, pps: true, autoUpdate: false },
-    }, null, 2));
+    const wanted = JSON.stringify({ ClientSettings: { poolAddress: CFG.POOL_WS, pps: true } }, null, 2);
+    try { if (fs.readFileSync(file, 'utf8') === wanted) return; } catch (_) {}
+    fs.writeFileSync(file, wanted);
+  }
+
+  /** true si le fichier de réglages du client ne contient aucun accessToken (test / diagnostic). */
+  settingsClean() {
+    try {
+      const s = JSON.parse(fs.readFileSync(path.join(this.dir, 'appsettings.json'), 'utf8'));
+      const cs = s.ClientSettings || {};
+      return !Object.keys(cs).some((k) => k.toLowerCase() === 'accesstoken');
+    } catch (_) { return false; }
   }
 
   get running() { return !!this.child; }
@@ -151,8 +161,11 @@ class MinerClient extends EventEmitter {
    */
   start(opts) {
     if (this.child) throw new Error('already_running');
+    // jamais de token : l'auto-update du client pourrait ré-extraire l'appsettings.json officiel
+    try { this.writeSettings(); } catch (_) {}
     const args = [
       `--ClientSettings:QubicAddress=${opts.address}`,
+      `--ClientSettings:AccessToken=`,
       `--ClientSettings:Alias=${opts.alias}`,
       `--ClientSettings:PPS=true`,
       `--ClientSettings:Trainer:Cpu=true`,
